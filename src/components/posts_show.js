@@ -22,25 +22,34 @@ class PostsShow extends Component {
   render() {
     
     const { post } = this.props;
+    //console.log(post);
 
     if (!post) {
       return <div>Loading...</div>;
     }
 
     return (
-      <div>
-        <Link className="btn btn-primary" to="/">Back To Index</Link>
-        <button
-          className="btn btn-danger pull-xs-right"
-          onClick={this.onDeleteClick.bind(this)}
-        >
-          Delete Post
-        </button>
-        <h3>{post.title}</h3>
+      <div className='container'>
+        <div className='btn-group'>
+          <Link className="btn btn-primary" to="/">Back To Index</Link>
+          <button
+            className="btn btn-danger"
+            onClick={this.onDeleteClick.bind(this)}
+          >
+            Delete Post
+          </button>
+        </div>
+        <h3 style={{marginTop:20}}>{post.title}</h3>
+        <p>{post.user}</p>
         <p>{post.content}</p>
-        <div> 
-          Comments:
-          <div>
+        <div className="card"> 
+          <div className="card-header">
+            <h5>Comments</h5>
+            <div className='btn-group'>
+              <button className="btn btn-primary">New Comment</button>
+            </div>
+          </div>
+          <div className='card-body'>
            <CommentsShow post_id={post._id} />
           </div>
         </div> 

@@ -31,27 +31,29 @@ class PostsNew extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <div>
-            <label>Tiêu đề bài viết: </label>
-            <div>
-                <Field name="title" component={this.renderField} />
-            </div>
-        </div>
+        <Field
+          name="title"
+          label="Article Title"
+          component={this.renderField}
+        />
+          
         
         <Field
-          label="Nội dung"
+          label="Content"
           name="content"
           component={this.renderField}
         />
 
         <Field
-          label="ID của người dùng"
+          label="Author"
           name="user_id"
           value="5a71d47f50c7ca4ca878ba43"
           component={this.renderField}
         />
-        <button type="submit" className="btn btn-primary">Đăng bài</button>
-        <Link to="/" className="btn btn-danger">Hủy</Link>
+        <div className='btn-group'>
+          <button type="submit" className="btn btn-primary">Post</button>
+          <Link to="/" className="btn btn-danger">Cancel</Link>
+        </div>
       </form>
     );
   }
@@ -63,12 +65,11 @@ function validate(values) {
 
   // Validate the inputs from 'values'
   if (!values.title) {
-    errors.title = "Tiêu đề không được trống";
+    errors.title = "Title must not be empty!";
   }
   if (!values.content) {
-    errors.content = "Nội dung không được trống";
+    errors.content = "Content must not be empty!";
   }
-
   // If errors is empty, the form is fine to submit
   // If errors has *any* properties, redux form assumes form is invalid
   return errors;

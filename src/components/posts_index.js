@@ -14,7 +14,7 @@ class PostsIndex extends Component {
       return (
         <li className="list-group-item" key={post._id}>
           <Link to={`/posts/${post._id}`}>
-            {post.title}
+            {post.title + ' - ' + post.user}
           </Link>
         </li>
       );
@@ -23,13 +23,13 @@ class PostsIndex extends Component {
 
   render() {
     return (
-             <div>
+       <div>
         <div className="text-xs-right">
           <Link className="btn btn-primary" to="/posts/new">
-            Viết bài
+            New Post
           </Link>
         </div>
-        <h3>Danh sách bài viết</h3>
+        <h3>List of Articles</h3>
         <ul className="list-group">
           {this.renderPosts()}
         </ul>

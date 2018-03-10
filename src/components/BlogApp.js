@@ -9,6 +9,7 @@ import reducers from "../reducers";
 import PostsIndex from "./posts_index";
 import PostsNew from "./posts_new";
 import PostsShow from "./posts_show";
+import Jumbotron from "./Jumbotron";
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -18,6 +19,7 @@ class BlogApp extends Component {
      <Provider store={createStoreWithMiddleware(reducers)}>
       <BrowserRouter>
         <div>
+          <Jumbotron/>
           <Switch>
             <Route path="/posts/new" component={PostsNew} />
             <Route path="/posts/:id" component={PostsShow} />
@@ -26,9 +28,7 @@ class BlogApp extends Component {
         </div>
       </BrowserRouter>
     </Provider>
-      
-      
-      );
+    );
   }
 }
 
