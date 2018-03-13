@@ -6,12 +6,13 @@ export const CREATE_POST = "create_post";
 export const DELETE_POST = "delete_post";
 export const FETCH_COMMENTS = "fetch_comments";
 
+export const ADD_COMMENTS = "ADD_COMMENTS";
+
 const ROOT_URL = "https://fcchanoiblog-mtanzim.c9users.io/api";
 const API_KEY = '';
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
-
   return {
     type: FETCH_POSTS,
     payload: request
@@ -54,6 +55,16 @@ export function fetchComments(id) {
 
   return {
     type: FETCH_COMMENTS,
+    payload: request
+  };
+}
+
+export function addComments(id) {
+  const request = axios.post(`${ROOT_URL}/comments?post_id=${id}`);
+  console.log('Hi');
+  console.log(request);
+  return {
+    type: ADD_COMMENTS,
     payload: request
   };
 }

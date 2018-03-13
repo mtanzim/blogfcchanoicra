@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPost, deletePost, fetchComments } from "../actions";
+import { fetchPost, deletePost, fetchComments, addComments } from "../actions";
 import CommentsShow from './comments_show';
 
 class PostsShow extends Component {
@@ -17,6 +17,11 @@ class PostsShow extends Component {
     this.props.deletePost(id, () => {
       this.props.history.push("/");
     });
+  }
+
+  onAddCommentClick = () => {
+    const { id } = this.props.match.params;
+    this.props.addComments(id);
   }
 
   render() {
@@ -46,7 +51,7 @@ class PostsShow extends Component {
           <div className="card-header">
             <h5>Comments</h5>
             <div className='btn-group'>
-              <button className="btn btn-primary">New Comment</button>
+              <button onClick={this.onAddCommentClick} className="btn btn-primary">New Comment</button>
             </div>
           </div>
           <div className='card-body'>
@@ -62,4 +67,4 @@ function mapStateToProps({ posts }, ownProps) {
   return { post: posts[ownProps.match.params.id] };
 }
 
-export default connect(mapStateToProps, { fetchPost, deletePost })(PostsShow);
+export default connect(mapStateToProps, { fetchPost, deletePost, addComments })(PostsShow);
