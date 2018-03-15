@@ -1,14 +1,19 @@
 import _ from "lodash";
-import { FETCH_COMMENTS, ADD_COMMENTS, DELETE_COMMENT } from "../actions";
+import { FETCH_COMMENTS, ADD_COMMENTS, DELETE_COMMENT, CLEAR_COMMENTS } from "../actions";
 
 export default function CommentsReducer(state = {}, action) {
     switch (action.type) {
         case FETCH_COMMENTS:
             return action.payload.data;
         case ADD_COMMENTS:
-            return action.payload.data;
+            //console.log(action.payload.data);
+            return _.concat(state, action.payload.data);
         case DELETE_COMMENT:
-            return action.payload;
+            //console.log('deleted: ' + action.payload)
+            return _.without(state, action.payload);
+            //return action.payload;
+        case CLEAR_COMMENTS:
+          return []
         default:
             return state;
     }

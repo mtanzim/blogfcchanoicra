@@ -1,35 +1,53 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchComments, deleteComments } from "../actions";
+import { fetchComments, deleteComments, addComments, clearComments } from "../actions";
 
 class CommentsShow extends Component {
+  
+  
+  
   componentWillMount() {
     this.props.fetchComments(this.props.post_id);
   }
-  
-  
+  componentWillUnmount() {
+    this.props.clearComments();
+  }
+  onAddCommentClick = () => {
+    this.props.addComments(this.props.post_id);
+  }
   onDeleteClick = (id) => {
     //const { id } = this.props.match.params;
     return () => {
       this.props.deleteComments(id, () => {
-        this.props.history.push("/");
+        this.props.fetchComments(this.props.post_id);
       });
     }
   }
 
   render() {
     const { comments } = this.props;
-
+    console.log(comments);
+    
+    /*
     if (!comments.length) {
       return <div></div>;
     }
+    */
 
     return (
       <div>
-          {
+        <div className="card">
+          <div className="card-header">
+              <h5>Comments</h5>
+              <div className='btn-group'>
+                <button onClick={this.onAddCommentClick} className="btn btn-primary">New Comment</button>
+              </div>
+            </div>
+          <div className='card-body'>
+          {(comments.length > 0)  && (
             comments.map(comment => (
               <div key={comment._id}>
-                <div className="card" style={{'margin':'3%'}}> 
+                <div className="card" style={{'margin':'1%'}}> 
                   <div className="card-header">
                     {comment.authorID}
                   </div>
@@ -40,8 +58,10 @@ class CommentsShow extends Component {
                 </div>
               </div>
             ))
-          }
+          )}
+        </div>
       </div>
+    </div>
     );
   }
 }
@@ -50,4 +70,4 @@ function mapStateToProps(state) {
   return { comments: state.comments };
 }
 
-export default connect(mapStateToProps, { fetchComments, deleteComments })(CommentsShow);
+export default connect(mapStateToProps, { fetchComments, deleteComments, addComments, clearComments })(CommentsShow);

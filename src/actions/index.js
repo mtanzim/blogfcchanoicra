@@ -8,6 +8,7 @@ export const FETCH_COMMENTS = "fetch_comments";
 
 export const ADD_COMMENTS = "ADD_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
 
 const ROOT_URL = "https://fcchanoiblog-mtanzim.c9users.io/api";
 const API_KEY = '';
@@ -60,6 +61,14 @@ export function fetchComments(id) {
   };
 }
 
+
+export function clearComments() {
+  return {
+    type: CLEAR_COMMENTS
+  };
+}
+
+
 export function addComments(id) {
   //update this to use redux-form values!!!
   const request = axios.post(`${ROOT_URL}/comments?post_id=${id}`,
@@ -74,7 +83,7 @@ export function addComments(id) {
 
 export function deleteComments(id, callback) {
   const request = axios
-    .delete(`${ROOT_URL}/comments?id=${id}`)
+    .delete(`${ROOT_URL}/comments/${id}`)
     .then(() => callback());
 
   return {
