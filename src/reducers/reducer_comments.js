@@ -7,7 +7,7 @@ export default function CommentsReducer(state = {}, action) {
             return action.payload.data;
         case ADD_COMMENTS:
             //console.log(action.payload.data);
-            return _.concat(state, action.payload.data);
+            return _.concat(action.payload.data, state);
         case DELETE_COMMENT:
             //console.log('deleted: ' + action.payload)
             return _.without(state, action.payload);
