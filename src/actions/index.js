@@ -9,6 +9,7 @@ export const FETCH_COMMENTS = "fetch_comments";
 export const ADD_COMMENTS = "ADD_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
+export const EDIT_COMMENT = "EDIT_COMMENT";
 
 const ROOT_URL = "https://fcchanoiblog-mtanzim.c9users.io/api";
 const API_KEY = '';
@@ -81,13 +82,24 @@ export function addComments(id, newComment) {
   };
 }
 
-export function deleteComments(id, callback) {
+export function deleteComments(id) {
   const request = axios
     .delete(`${ROOT_URL}/comments/${id}`)
-    .then(() => callback());
+    //.then(() => callback());
 
   return {
     type: DELETE_COMMENT,
     payload: id
+  };
+}
+
+export function editComment(id, content) {
+  const request = axios
+    .put(`${ROOT_URL}/comments/${id}`,
+    {content:content})
+  //console.log(request)
+  return {
+    type: EDIT_COMMENT,
+    payload: request
   };
 }
