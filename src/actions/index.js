@@ -11,8 +11,14 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 
-const ROOT_URL = "https://fcchanoiblog-mtanzim.c9users.io/api";
+//require('dotenv').config()
+
+const ROOT_URL = "http://localhost:8080/api";
+//const ROOT_URL=process.env.API_ADDRESS;
+//const ROOT_URL=''
 const API_KEY = '';
+
+console.log(process.env.API_ADDRESS);
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
