@@ -13,12 +13,12 @@ export const EDIT_COMMENT = "EDIT_COMMENT";
 
 //require('dotenv').config()
 
-const ROOT_URL = "http://localhost:8080/api";
-//const ROOT_URL=process.env.API_ADDRESS;
+//const ROOT_URL = "http://localhost:8080/api";
+const ROOT_URL = process.env.REACT_APP_API_ADDRESS;
 //const ROOT_URL=''
 const API_KEY = '';
 
-console.log(process.env.API_ADDRESS);
+console.log(process.env.REACT_APP_API_ADDRESS);
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
