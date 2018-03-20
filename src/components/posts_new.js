@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions";
 
+import "../App.css"
+
 class PostsNew extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -12,7 +14,9 @@ class PostsNew extends Component {
     return (
       <div className={className}>
         <label>{field.label}</label>
-        <input className="form-control" type="text" {...field.input} />
+        {field.label ==="Content"?
+          (<textarea className="form-control" id="postContent" type="text" {...field.input} />) :
+          (<input className="form-control" type="text" {...field.input} />)}
         <div className="text-help">
           {touched ? error : ""}
         </div>

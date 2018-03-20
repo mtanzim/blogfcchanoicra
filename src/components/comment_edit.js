@@ -26,13 +26,13 @@ class CommentEdit extends Component {
   render () {
      return (
       <div>
-        <input required 
+        <textarea required 
                onChange={this.onEditCommentChange} 
                value={this.state.editComment} 
                type="text" 
-               className="form-control" 
+               className="form-control commentText" 
                placeholder={this.props.initContent}>
-         </input>
+         </textarea>
          <button type="button" onClick={this.onSaveEditClick} className='btn btn-success mt-2'>Save</button>
        </div>
     ) 

@@ -48,15 +48,6 @@ class CommentsShow extends Component {
 
   render() {
     const { comments } = this.props;
-    //console.log(comments);
-    //console.log(this.state.commentLocal);
-    
-    /*
-    if (!comments.length) {
-      return <div></div>;
-    }
-    */
-
     return (
       <div>
         <div className="card">
@@ -65,7 +56,7 @@ class CommentsShow extends Component {
               <form action='#' className='mt-4 clearfix'>
                 <div className="form-row">
                   <div className="form-group col">
-                    <input required onChange={this.onCommentChange} value={this.state.commentLocal} type="text" className="form-control" placeholder="Post New Comment"></input>
+                  <textarea required onChange={this.onCommentChange} value={this.state.commentLocal} type="text" className="form-control commentText" placeholder="Post New Comment"></textarea>
                       <button type="button" onClick={this.onAddCommentClick} className="btn btn-success mt-2 ">Post</button>
                   </div>
                 </div>
