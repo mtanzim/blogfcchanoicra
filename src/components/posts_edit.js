@@ -58,7 +58,7 @@ class PostsEdit extends Component {
     //console.log(id);
     //console.log(authorid);
     //console.log(content);
-    console.log(this.props);
+    //console.log(this.props);
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
