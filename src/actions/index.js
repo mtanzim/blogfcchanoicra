@@ -2,10 +2,11 @@ import axios from "axios";
 
 export const FETCH_POSTS = "fetch_posts";
 export const FETCH_POST = "fetch_post";
+export const EDIT_POST = "EDIT_POST";
 export const CREATE_POST = "create_post";
 export const DELETE_POST = "delete_post";
-export const FETCH_COMMENTS = "fetch_comments";
 
+export const FETCH_COMMENTS = "fetch_comments";
 export const ADD_COMMENTS = "ADD_COMMENTS";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
@@ -39,6 +40,17 @@ export function createPost(values, callback) {
   };
 }
 
+export function editPost(values, callback) {
+  const request = axios
+    .put(`${ROOT_URL}/posts${API_KEY}`, values)
+    .then(() => callback());
+
+  return {
+    type: EDIT_POST,
+    payload: request
+  };
+}
+
 export function fetchPost(id) {
   const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
 
@@ -58,6 +70,8 @@ export function deletePost(id, callback) {
     payload: id
   };
 }
+
+
 
 export function fetchComments(id) {
   const request = axios.get(`${ROOT_URL}/comments?post_id=${id}`);

@@ -50,7 +50,7 @@ class CommentsShow extends Component {
     const { comments } = this.props;
     return (
       <div>
-        <div className="card">
+        <div className="card mt-5">
           <div className="card-header">
               <h5>Comments</h5>
               <form action='#' className='mt-4 clearfix'>

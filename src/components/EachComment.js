@@ -21,7 +21,7 @@ class EachComment extends Component {
           </h5>
           <div className="card-body clearfix" style={{'padding':'1px'}}>
             {!this.state.isEditingComment? 
-              (<p className="">{this.props.comment.content}</p>) :
+              (<p className="postContent">{this.props.comment.content}</p>) :
               (<CommentEdit commentID={this.props.comment._id} initContent={this.props.comment.content} toggleEdit={this.onEditCommentClick}/>)
             }
             <div className='btn-group float-right'>

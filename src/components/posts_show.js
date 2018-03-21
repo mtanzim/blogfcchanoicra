@@ -24,7 +24,7 @@ class PostsShow extends Component {
   render() {
     
     const { post } = this.props;
-    //console.log(post);
+    console.log(this.props.post);
 
     if (!post) {
       return <div>Loading...</div>;
@@ -34,6 +34,10 @@ class PostsShow extends Component {
       <div className='container'>
         <div className='btn-group'>
           <Link className="btn btn-primary" to="/">Back To Index</Link>
+          <Link className="btn btn-success" to={{
+                                                  pathname:`edit/${post._id}/${post.user}`,
+                                                  state:{content:post.content,
+                                                          title:post.title}}}>Edit Post</Link>
           <button
             className="btn btn-danger"
             onClick={this.onDeleteClick.bind(this)}>
@@ -42,7 +46,7 @@ class PostsShow extends Component {
         </div>
         <h3 style={{marginTop:20}}>{post.title}</h3>
         <p>{post.user}</p>
-        <p>{post.content}</p>
+        <div className='postContent'>{post.content}</div>
         <CommentsShow post_id={post._id} />
       </div>
     );

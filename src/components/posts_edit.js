@@ -2,20 +2,37 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { createPost } from "../actions";
+import { editPost, fetchPost } from "../actions";
 
 import "../App.css"
 
-class PostsNew extends Component {
+class PostsEdit extends Component {
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.fetchPost(id);
+  }
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
+    //var modInput = {...field.input, value:field.content}
+    //console.log(modInput);
+
     return (
       <div className={className}>
         <label>{field.label}</label>
+        <p>{field.content}</p>
         {field.label ==="Content"?
-          (<textarea className="form-control" id="postContent" type="text" {...field.input} />) :
+
+
+          ( <div>
+              
+              <textarea className="form-control" id="postContent" type="text" {...field.input} />
+            </div>
+          ) :
+
+
           (<input className="form-control" type="text" {...field.input} />)}
         <div className="text-help">
           {touched ? error : ""}
@@ -25,13 +42,23 @@ class PostsNew extends Component {
   }
 
   onSubmit(values) {
-    this.props.createPost(values, () => {
+    this.props.editPost(values, () => {
       this.props.history.push("/");
     });
   }
 
   render() {
     const { handleSubmit } = this.props;
+
+    //const { authorid, id } = this.props.match.params;
+    //const { content, title } = this.props.location.state;
+    //const {  } = this.props.match.params;
+    //this.props.fetchPost(id);
+    //console.log(this.props)
+    //console.log(id);
+    //console.log(authorid);
+    //console.log(content);
+    console.log(this.props);
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -48,11 +75,13 @@ class PostsNew extends Component {
           component={this.renderField}
         />
 
-        <Field
+        {/*<Field
+          disabled='true'
           label="Author"
           name="user_id"
+          value={this.props.authorID}
           component={this.renderField}
-        />
+        />*/}
         <div className='btn-group'>
           <button type="submit" className="btn btn-primary">Post</button>
           <Link to="/" className="btn btn-danger">Cancel</Link>
@@ -78,7 +107,15 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
+function mapStateToProps({ posts }, ownProps) {
+  return { initialValues:posts[ownProps.match.params.id] }
+}
+
+
+let ConnectedForm = reduxForm({
   validate,
-  form: "PostsNewForm"
-})(connect(null, { createPost })(PostsNew));
+  form: "PostsEditForm",
+  enableReinitialize: true
+})(PostsEdit)
+
+export default connect(mapStateToProps, { editPost, fetchPost })(ConnectedForm);

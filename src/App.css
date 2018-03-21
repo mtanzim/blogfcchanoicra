@@ -37,3 +37,8 @@
   height:75px;
   white-space: pre-wrap;
 }
+
+.postContent {
+  white-space: pre-wrap;
+  padding: 10px;
+}
