@@ -24,7 +24,7 @@ class PostsShow extends Component {
   render() {
     
     const { post } = this.props;
-    console.log(this.props.post);
+    //console.log(this.props.post);
 
     if (!post) {
       return <div>Loading...</div>;
