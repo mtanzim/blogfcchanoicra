@@ -40,11 +40,12 @@ export function createPost(values, callback) {
   };
 }
 
-export function editPost(values, callback) {
+export function editPost(id, values) {
   const request = axios
-    .put(`${ROOT_URL}/posts${API_KEY}`, values)
-    .then(() => callback());
+    .put(`${ROOT_URL}/posts/${id}${API_KEY}`, values)
+    //.then(() => callback());
 
+  //console.log(request);
   return {
     type: EDIT_POST,
     payload: request

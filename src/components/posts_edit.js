@@ -42,23 +42,17 @@ class PostsEdit extends Component {
   }
 
   onSubmit(values) {
-    this.props.editPost(values, () => {
-      this.props.history.push("/");
+    //console.log(values);
+    this.props.editPost(values._id,{title:values.title, content:values.content, user_id:values.user})
+    .then ( () => {
+      //console.log(this.props.location)
+      //go back to the current post!
+      this.props.history.push("/posts/"+values._id);
     });
   }
 
   render() {
     const { handleSubmit } = this.props;
-
-    //const { authorid, id } = this.props.match.params;
-    //const { content, title } = this.props.location.state;
-    //const {  } = this.props.match.params;
-    //this.props.fetchPost(id);
-    //console.log(this.props)
-    //console.log(id);
-    //console.log(authorid);
-    //console.log(content);
-    //console.log(this.props);
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
@@ -112,10 +106,21 @@ function mapStateToProps({ posts }, ownProps) {
 }
 
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editPost: (id, values) => {
+      return dispatch(editPost(id, values))
+    },
+    fetchPost: (id) => {
+      dispatch(fetchPost(id))
+    }
+  }
+}
+
 let ConnectedForm = reduxForm({
   validate,
   form: "PostsEditForm",
   enableReinitialize: true
 })(PostsEdit)
 
-export default connect(mapStateToProps, { editPost, fetchPost })(ConnectedForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedForm);
