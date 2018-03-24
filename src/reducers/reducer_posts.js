@@ -6,8 +6,6 @@ export default function PostsReducer(state = {}, action) {
     case DELETE_POST:
       return _.omit(state, action.payload);
     case EDIT_POST:
-      //console.log(action);
-      //return state
       return { ...state, [action.payload.data._id]: action.payload.data };
     case FETCH_POST:
       return { ...state, [action.payload.data._id]: action.payload.data };

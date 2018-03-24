@@ -26,8 +26,8 @@ class BlogApp extends Component {
               <Route path="/posts/new" component={PostsNew} />
               <Route path="/posts/edit/:id/:authorid" component={PostsEdit} />
               <Route path="/posts/:id" component={PostsShow} />
-              <Route path="/" component={UserLogin} />
               <Route path="/login" component={UserLogin} />
+              <Route path="/" component={PostsIndex} />
             </Switch>
           </div>
         </BrowserRouter>

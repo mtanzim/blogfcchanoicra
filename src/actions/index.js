@@ -15,9 +15,9 @@ export const EDIT_COMMENT = "EDIT_COMMENT";
 //require('dotenv').config()
 
 //const ROOT_URL = "http://localhost:8080/api";
-const ROOT_URL = process.env.REACT_APP_API_ADDRESS;
+export const ROOT_URL = process.env.REACT_APP_API_ADDRESS;
 //const ROOT_URL=''
-const API_KEY = '';
+export const API_KEY = '';
 
 console.log(process.env.REACT_APP_API_ADDRESS);
 
