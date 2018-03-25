@@ -23,13 +23,13 @@ class PostsEdit extends Component {
       <div className={className}>
         <label>{field.label}</label>
         <p>{field.content}</p>
-        {field.label ==="Content"?
+        {field.label === "Content" ?
 
 
-          ( <div>
-              
-              <textarea className="form-control" id="postContent" type="text" {...field.input} />
-            </div>
+          (<div>
+
+            <textarea className="form-control" id="postContent" type="text" {...field.input} />
+          </div>
           ) :
 
 
@@ -43,12 +43,12 @@ class PostsEdit extends Component {
 
   onSubmit(values) {
     //console.log(values);
-    this.props.editPost(values._id,{title:values.title, content:values.content, user_id:values.user})
-    .then ( () => {
-      //console.log(this.props.location)
-      //go back to the current post!
-      this.props.history.push("/posts/"+values._id);
-    });
+    this.props.editPost(values._id, { title: values.title, content: values.content, user_id: values.user })
+      .then(() => {
+        //console.log(this.props.location)
+        //go back to the current post!
+        this.props.history.push("/posts/" + values._id);
+      });
   }
 
   render() {
@@ -61,8 +61,8 @@ class PostsEdit extends Component {
           label="Article Title"
           component={this.renderField}
         />
-          
-        
+
+
         <Field
           label="Content"
           name="content"
@@ -102,7 +102,7 @@ function validate(values) {
 }
 
 function mapStateToProps({ posts }, ownProps) {
-  return { initialValues:posts[ownProps.match.params.id] }
+  return { initialValues: posts[ownProps.match.params.id] }
 }
 
 

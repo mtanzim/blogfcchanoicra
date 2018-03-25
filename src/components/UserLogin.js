@@ -3,6 +3,9 @@ import LoginMenu from './LoginMenu';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
+import SignupForm from "./UserSignupReduxForm"
+import LoginForm from "./UserLoginReduxForm"
+
 //import { loginAndGetNotes } from '../actions/auth';
 
 /* const mapStateToProps = (state) => {
@@ -81,10 +84,7 @@ class UserLogin extends React.Component {
   handleChangeUser = (event) => {
     this.setState({ username: event.target.value });
   }
-
-  render() {
-
-
+  renderClassicForm = () => {
     return (
       <div className="container">
         {this.state.needMenu && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
@@ -114,6 +114,27 @@ class UserLogin extends React.Component {
 
     );
 
+  }
+
+  
+  submitSignup = values => {
+    console.log(values)
+  }
+
+  submitLogin = values => {
+    console.log(values)
+  }
+  render() {
+    return (
+        <div className='container'>
+          {/*this.renderClassicForm()*/}
+          {this.state.needMenu && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
+          {!this.state.isLogin ?
+            (<SignupForm onSubmit={this.submitSignup} />):
+            (<LoginForm onSubmit={this.submitLogin} />)
+          }
+        </div>
+      )
   }
 
 }

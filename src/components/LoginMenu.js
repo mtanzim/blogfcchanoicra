@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 const LoginMenu = ({ toggleLogin, toggleSignup }) => {
   return (
-    <div>
+    <div className='mb-2'>
       <ul className="nav nav-tabs mt-2 mb-2">
         <li className="nav-item">
           <a className="nav-link" onClick={toggleLogin}>Login</a>
@@ -14,5 +14,4 @@ const LoginMenu = ({ toggleLogin, toggleSignup }) => {
     </div>
   )
 }
-
 export default LoginMenu;
