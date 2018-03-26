@@ -3,8 +3,12 @@ import LoginMenu from './LoginMenu';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
+//components
 import SignupForm from "./UserSignupReduxForm"
 import LoginForm from "./UserLoginReduxForm"
+
+//actions
+import {signupUser,loginUser } from "../actions/auth"
 
 //import { loginAndGetNotes } from '../actions/auth';
 
@@ -22,17 +26,15 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
  */
-class UserLogin extends React.Component {
+
+const NEED_MENU=true;
+
+class UserLoginBase extends React.Component {
+  
   constructor(props) {
+    
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      passwordVer: '',
-      errMsg: '',
-      isRedirect: false,
-      isSocial: false,
-      needMenu: true,
       isLogin: true//toggles between signup and login
     }
   }
@@ -75,7 +77,7 @@ class UserLogin extends React.Component {
   } */
 
 
-  handleChangePass = (event) => {
+/*  handleChangePass = (event) => {
     this.setState({ password: event.target.value });
   }
   handleChangePassVer = (event) => {
@@ -87,7 +89,7 @@ class UserLogin extends React.Component {
   renderClassicForm = () => {
     return (
       <div className="container">
-        {this.state.needMenu && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
+        {this.NEED_MENU && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
         <form className="mt-4" onSubmit={this.handleLogIn}>
           <div className="form-group">
             <label htmlFor="email">Username</label>
@@ -106,7 +108,7 @@ class UserLogin extends React.Component {
             (<button type="submit" className="btn btn-primary">Sign Up!</button>) :
             (<div>
               <button type="submit" className="btn btn-success">Log In!</button><br />
-              {!this.state.needMenu && (<small>New Accounts will be signed up automatically.</small>)}
+              {!this.NEED_MENU && (<small>New Accounts will be signed up automatically.</small>)}
             </div>)
           }
         </form>
@@ -114,21 +116,23 @@ class UserLogin extends React.Component {
 
     );
 
-  }
+  }*/
 
   
   submitSignup = values => {
-    console.log(values)
+    console.log(values);
+    this.props.signupUser(values);
   }
 
   submitLogin = values => {
-    console.log(values)
+    console.log(values);
+    this.props.loginUser(values);
   }
   render() {
     return (
         <div className='container'>
           {/*this.renderClassicForm()*/}
-          {this.state.needMenu && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
+          {NEED_MENU && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
           {!this.state.isLogin ?
             (<SignupForm onSubmit={this.submitSignup} />):
             (<LoginForm onSubmit={this.submitLogin} />)
@@ -139,6 +143,6 @@ class UserLogin extends React.Component {
 
 }
 
-//const UserLogin = connect(mapStateToProps, mapDispatchToProps)(UserLoginBase);
+const UserLogin = connect(null, {signupUser,loginUser})(UserLoginBase);
 
 export default UserLogin;

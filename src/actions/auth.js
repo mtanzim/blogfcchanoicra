@@ -5,7 +5,7 @@ export const SIGNUP_USER ='SIGNUP_USER'
 export const signupUser = (values) => {
   const { username, password, email } = values;
   console.log(values);
-  const request = axios.post(`${ROOT_URL}${API_KEY}`, values)
+  const request = axios.post(`${ROOT_URL}/users${API_KEY}`, values)
   return {
     type: SIGNUP_USER,
     payload: request
@@ -13,29 +13,13 @@ export const signupUser = (values) => {
 }
 
 //this needs to be examined in the backend, there is currently no user authentication
+export const LOGIN_USER ='LOGIN_USER'
 export const loginUser = (values) => {
   const { username, password, email } = values;
   console.log(values);
-  const request = axios.get(`${ROOT_URL}${API_KEY}`, values)
+  const request = axios.get(`${ROOT_URL}/users${API_KEY}`, values)
   return {
-    type: SIGNUP_USER,
+    type: LOGIN_USER,
     payload: request
   };
 }
-
-/*   //console.log(authRoute);
-  return (dispatch) => {
-    dispatch(loggingUserIn(user));
-    //axios login
-    return axios({
-      method: 'post',
-      url: authRoute,
-      data: user
-    }).then(res => {
-      //console.log(res.data.content);
-      dispatch(loggedin(res.data.content));
-    }).catch(err => {
-      dispatch(loginFailed(user, err.response.data.error, isLogin));
-    });
-  }
-}; */

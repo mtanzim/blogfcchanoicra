@@ -34,7 +34,7 @@ export const renderAuthFormField = (field) => {
 
 const validate = values => {
   // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
-  console.log(values)
+  //console.log(values)
   const errors = {};
   if (!values.username) {
     errors.username = "Username must not be empty!";
