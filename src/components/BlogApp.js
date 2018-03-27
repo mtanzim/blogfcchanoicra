@@ -13,7 +13,16 @@ import PostsShow from "./posts_show";
 import Jumbotron from "./Jumbotron";
 import UserLogin from "./UserLogin"
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const logger = store => next => action => {
+  console.group(action.type)
+  console.info('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  console.groupEnd(action.type)
+  return result
+}
+
+const createStoreWithMiddleware = applyMiddleware(promise, logger)(createStore);
 
 class BlogApp extends Component {
   render() {

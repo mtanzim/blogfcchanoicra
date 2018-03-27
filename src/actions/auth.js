@@ -17,7 +17,7 @@ export const LOGIN_USER ='LOGIN_USER'
 export const loginUser = (values) => {
   const { username, password, email } = values;
   console.log(values);
-  const request = axios.get(`${ROOT_URL}/users${API_KEY}`, values)
+  const request = axios.post(`${ROOT_URL}/auth${API_KEY}`, values)
   return {
     type: LOGIN_USER,
     payload: request
