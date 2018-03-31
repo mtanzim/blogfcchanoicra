@@ -12,7 +12,8 @@ const defaultAuth = {
 export default function authReducer(state = defaultAuth, action) {
     switch (action.type) {
         case LOGIN_USER:
-          console.log(action.payload)
+          console.log('aut reducer')
+          console.log(action.payload.data)
           return action.payload.data;
         case SIGNUP_USER:
           console.log(action.payload)
