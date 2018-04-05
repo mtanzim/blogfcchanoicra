@@ -9,10 +9,10 @@ let SignupForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className='container'>
-        <Field name="username" label="Username" component={renderAuthFormField} type="text" />
+        <Field name="email" label="Email" component={renderAuthFormField} type="email" />
         <Field name="password" label="Password" component={renderAuthFormField} type="password" />
         <Field name="verPassword" label="Verify Password" component={renderAuthFormField} type="password" />
-        <Field name="email" label="Email" component={renderAuthFormField} type="email" />
+        <Field name="username" label="Username" component={renderAuthFormField} type="text" />
         <button className="btn btn-primary" type="submit">Sign Up</button>
       </div>
     </form>
@@ -25,6 +25,9 @@ const validate = values => {
   const errors = {};
   if (!values.username) {
     errors.username = "Username must not be empty!";
+  }
+  if (!values.email) {
+    errors.email = "E-mail must not be empty!";
   }
   if (!values.password) {
     errors.password = "Password must not be empty!";

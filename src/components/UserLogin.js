@@ -51,14 +51,14 @@ class UserLoginBase extends React.Component {
   }
 
 
-/*   completeLogin = () => {
+  completeLogin = () => {
     this.props.loginUser({ email: this.state.username, password: this.state.password }, this.state.isLogin)
       .then(() => this.setState({ isRedirect: true }))
       .catch((err) => {
         console.log(err);
       });
     this.setState({ password: '' });
-  } */
+  }
 
 /*   handleLogIn = (event) => {
     event.preventDefault();
@@ -121,14 +121,28 @@ class UserLoginBase extends React.Component {
   
   submitSignup = values => {
     console.log(values);
-    this.props.signupUser(values);
+    this.props.signupUser(values)
+    
   }
 
   submitLogin = values => {
     console.log(values);
-    this.props.loginUser(values);
+    this.props.loginUser(values)
+      .then( () => {
+        console.log(this.props.auth);
+        if (this.props.auth.authenticated) {
+          this.setState({ isRedirect: true });
+        } else {
+          alert(this.props.auth.err);
+        }
+
+      
+      });
   }
   render() {
+    if (this.state.isRedirect) {
+      return <Redirect to='/' />;
+    }
     return (
         <div className='container'>
           {/*this.renderClassicForm()*/}
@@ -143,6 +157,10 @@ class UserLoginBase extends React.Component {
 
 }
 
-const UserLogin = connect(null, {signupUser,loginUser})(UserLoginBase);
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+const UserLogin = connect(mapStateToProps, {signupUser,loginUser})(UserLoginBase);
 
 export default UserLogin;

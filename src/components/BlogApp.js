@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
+import thunk from 'redux-thunk';
 
 import reducers from "../reducers";
 import PostsIndex from "./posts_index";
@@ -22,7 +23,7 @@ const logger = store => next => action => {
   return result
 }
 
-const createStoreWithMiddleware = applyMiddleware(promise, logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
 
 class BlogApp extends Component {
   render() {
