@@ -29,24 +29,6 @@ export default function authReducer(state = defaultAuth, action) {
         ...defaultAuth,
         fetching: true
       }
-    // case `${LOGIN_USER}_REJECTED`:
-    //   return {
-    //     ...defaultAuth,
-    //     authenticated: false,
-    //     user: {},
-    //     err: action.payload.data.response.message
-    //   }
-
-      //return action.payload.data
-    // case `${LOGIN_USER}_FULFILLED`:
-    //   console.log('auth reducer')
-    //   console.log(action.payload.data)
-    //   return action.payload.data
-    // case `${LOGIN_USER}_REJECTED`:
-    //   console.log(action.payload)
-    //   console.log('REJECTED!!!!!!!!!!!')
-    //   console.log(action.payload.response.data.error.message)
-    //   return {...defaultAuth, err:action.payload.response.data.error.message};
     case SIGNUP_USER:
       return action.payload.data;
     default:

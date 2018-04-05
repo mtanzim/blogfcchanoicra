@@ -32,9 +32,8 @@ export const loginSuccess = (res) => {
   }
 }
 
-//this needs to be examined in the backend, there is currently no user authentication
-export const LOGIN_USER ='LOGIN_USER'
 //requires thunk
+export const LOGIN_USER ='LOGIN_USER'
 export const loginUser = (values) => {
   //const { username, password, email } = values;
   //console.log(values);
@@ -45,14 +44,9 @@ export const loginUser = (values) => {
     })
     return request
     .then( res => {
-      // if (res.payload.error){
-      //   dispatch(loginFailed(res.payload.error));
-      // } else {
         dispatch(loginSuccess(res));
-      // }
-    
     })
-    .catch ( (err) => {
+    .catch (err => {
       dispatch (loginFailed(err));
     })
   }
