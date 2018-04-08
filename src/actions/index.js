@@ -91,10 +91,10 @@ export function clearComments() {
 }
 
 
-export function addComments(id, newComment) {
+export function addComments(id, newComment, authorID, authorName) {
   //update this to use redux-form values!!!
   const request = axios.post(`${ROOT_URL}/comments?post_id=${id}`,
-                              {comment_content:newComment, comment_authorID:'testUser', comment_postID:id});
+    { comment_content: newComment, comment_authorID: authorID, comment_authorName:authorName, comment_postID:id});
   //console.log('Hi');
   //console.log(request);
   return {

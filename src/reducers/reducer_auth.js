@@ -1,4 +1,4 @@
-import { SIGNUP_USER, LOGIN_USER, LOGIN_FAILED, LOGIN_SUCCESS } from "../actions/auth";
+import { SIGNUP_USER, LOGIN_USER, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT_USER } from "../actions/auth";
 
 //auth reducer
 const defaultAuth = {
@@ -29,6 +29,8 @@ export default function authReducer(state = defaultAuth, action) {
         ...defaultAuth,
         fetching: true
       }
+    case LOGOUT_USER:
+      return defaultAuth;
     case SIGNUP_USER:
       return action.payload.data;
     default:

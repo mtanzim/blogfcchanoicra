@@ -1,11 +1,32 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import {logoutUser } from "../actions/auth"
 
-const Jumbotron = ({}) => {
+const Jumbotron = ({ auth, logoutUser}) => {
   return (
-  	<div className="jumbotron">
-  	  <h1>Welcome to the Hanoi FCC Blog!</h1>
-  	</div>
+		<div> 
+			<div className="jumbotron">
+				<Link to="/"><h1>Welcome to the Hanoi FCC Blog!</h1></Link>
+					{!auth.authenticated ? (
+						<Link to="/login" className="btn btn-success">Log in!</Link>
+					):(
+						<div>
+							<h2>{auth.user.username}
+								<button onClick={logoutUser} className="ml-2 btn btn-danger">Log Out!</button>
+							</h2>
+						</div>
+					)}
+
+			</div>
+
+		</div>
   )
 }
 
-export default Jumbotron;
+function mapStateToProps(state) {
+	return { auth: state.auth };
+}
+
+
+export default connect(mapStateToProps, { logoutUser })(Jumbotron);

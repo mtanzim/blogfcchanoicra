@@ -25,7 +25,10 @@ class PostsNew extends Component {
   }
 
   onSubmit(values) {
-    this.props.createPost(values, () => {
+    console.log(this.props.auth)
+    let modValues = { ...values, user: this.props.auth.user._id, username: this.props.auth.user.username }
+    console.log(modValues);
+    this.props.createPost(modValues, () => {
       this.props.history.push("/");
     });
   }
@@ -48,11 +51,6 @@ class PostsNew extends Component {
           component={this.renderField}
         />
 
-        <Field
-          label="Author"
-          name="user_id"
-          component={this.renderField}
-        />
         <div className='btn-group'>
           <button type="submit" className="btn btn-primary">Post</button>
           <Link to="/" className="btn btn-danger">Cancel</Link>
@@ -75,7 +73,11 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
 export default reduxForm({
   validate,
   form: "PostsNewForm"
-})(connect(null, { createPost })(PostsNew));
+})(connect(mapStateToProps, { createPost })(PostsNew));

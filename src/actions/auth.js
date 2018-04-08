@@ -12,6 +12,17 @@ export const signupUser = (values) => {
   };
 }
 
+export const LOGOUT_USER = 'LOGOUT_USER'
+export const logoutUser = (values) => {
+  //const { username, password, email } = values;
+  //console.log(values);
+  const request = axios.get(`${ROOT_URL}/logout${API_KEY}`)
+  return {
+    type: LOGOUT_USER,
+    payload: request
+  };
+}
+
 
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 //requires thunk

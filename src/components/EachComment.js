@@ -17,7 +17,7 @@ class EachComment extends Component {
       <div>
         <div className="" style={{'margin':'1px'}}> 
           <h5 className="">
-            {this.props.comment.authorID}
+            {this.props.comment.authorName}
           </h5>
           <div className="card-body clearfix" style={{'padding':'1px'}}>
             {!this.state.isEditingComment? 

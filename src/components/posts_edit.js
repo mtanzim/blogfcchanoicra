@@ -43,7 +43,8 @@ class PostsEdit extends Component {
 
   onSubmit(values) {
     //console.log(values);
-    this.props.editPost(values._id, { title: values.title, content: values.content, user_id: values.user })
+    console.log(this.props.auth);
+    this.props.editPost(values._id, { title: values.title, content: values.content, user_id: this.props.auth.user._id })
       .then(() => {
         //console.log(this.props.location)
         //go back to the current post!
@@ -101,8 +102,8 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps({ posts }, ownProps) {
-  return { initialValues: posts[ownProps.match.params.id] }
+function mapStateToProps({ posts, auth }, ownProps) {
+  return { initialValues: posts[ownProps.match.params.id], auth:auth }
 }
 
 

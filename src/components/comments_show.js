@@ -21,7 +21,9 @@ class CommentsShow extends Component {
   }
   onAddCommentClick = () => {
     if(this.state.commentLocal){
-      this.props.addComments(this.props.post_id, this.state.commentLocal);
+
+      console.log(this.props.auth);
+      this.props.addComments(this.props.post_id, this.state.commentLocal, this.props.auth.user._id, this.props.auth.user.username);
       this.setState({
    	  	commentLocal:''
   	  });
@@ -75,7 +77,7 @@ class CommentsShow extends Component {
 
 
 function mapStateToProps(state) {
-  return { comments: state.comments };
+  return { comments: state.comments, auth:state.auth };
 }
 
 export default connect(mapStateToProps, { fetchComments, deleteComments, addComments, clearComments })(CommentsShow);

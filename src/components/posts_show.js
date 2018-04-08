@@ -45,7 +45,7 @@ class PostsShow extends Component {
           </button>
         </div>
         <h3 style={{marginTop:20}}>{post.title}</h3>
-        <p>{post.user}</p>
+        <p>{post.username}</p>
         <div className='postContent'>{post.content}</div>
         <CommentsShow post_id={post._id} />
       </div>
