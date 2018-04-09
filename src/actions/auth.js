@@ -5,7 +5,7 @@ export const SIGNUP_USER ='SIGNUP_USER'
 export const signupUser = (values) => {
   //const { username, password, email } = values;
   //console.log(values);
-  const request = axios.post(`${ROOT_URL}/users${API_KEY}`, values)
+  const request = axios.post(`${ROOT_URL}/signup${API_KEY}`, values)
   return {
     type: SIGNUP_USER,
     payload: request
