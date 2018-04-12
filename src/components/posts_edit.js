@@ -42,9 +42,10 @@ class PostsEdit extends Component {
   }
 
   onSubmit(values) {
-    //console.log(values);
+    console.log(values._id);
     console.log(this.props.auth);
-    this.props.editPost(values._id, { title: values.title, content: values.content, user_id: this.props.auth.user._id })
+    const { id } = this.props.match.params;
+    this.props.editPost(id, { title: values.title, content: values.content, user_id: this.props.auth.user._id })
       .then(() => {
         //console.log(this.props.location)
         //go back to the current post!

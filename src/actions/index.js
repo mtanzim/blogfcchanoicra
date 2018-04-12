@@ -22,7 +22,7 @@ export const API_KEY = '';
 console.log(process.env.REACT_APP_API_ADDRESS);
 
 export function fetchPosts() {
-  const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
+  const request = axios.get(`${ROOT_URL}/posts${API_KEY}`, { withCredentials: true });
   return {
     type: FETCH_POSTS,
     payload: request
@@ -30,8 +30,9 @@ export function fetchPosts() {
 }
 
 export function createPost(values, callback) {
+  // , { withCredentials: true }
   const request = axios
-    .post(`${ROOT_URL}/posts${API_KEY}`, values)
+    .post(`${ROOT_URL}/posts${API_KEY}`, values, { withCredentials: true })
     .then(() => callback());
 
   return {
@@ -42,7 +43,7 @@ export function createPost(values, callback) {
 
 export function editPost(id, values) {
   const request = axios
-    .put(`${ROOT_URL}/posts/${id}${API_KEY}`, values)
+    .put(`${ROOT_URL}/posts/${id}${API_KEY}`, values, { withCredentials: true })
     //.then(() => callback());
 
   //console.log(request);
@@ -53,7 +54,7 @@ export function editPost(id, values) {
 }
 
 export function fetchPost(id) {
-  const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
+  const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`, { withCredentials: true });
 
   return {
     type: FETCH_POST,
@@ -63,7 +64,7 @@ export function fetchPost(id) {
 
 export function deletePost(id, callback) {
   const request = axios
-    .delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+    .delete(`${ROOT_URL}/posts/${id}${API_KEY}`, { withCredentials: true })
     .then(() => callback());
 
   return {
@@ -75,7 +76,7 @@ export function deletePost(id, callback) {
 
 
 export function fetchComments(id) {
-  const request = axios.get(`${ROOT_URL}/comments?post_id=${id}`);
+  const request = axios.get(`${ROOT_URL}/comments?post_id=${id}`, { withCredentials: true });
 
   return {
     type: FETCH_COMMENTS,
@@ -94,7 +95,8 @@ export function clearComments() {
 export function addComments(id, newComment, authorID, authorName) {
   //update this to use redux-form values!!!
   const request = axios.post(`${ROOT_URL}/comments?post_id=${id}`,
-    { comment_content: newComment, comment_authorID: authorID, comment_authorName:authorName, comment_postID:id});
+    { comment_content: newComment, comment_authorID: authorID, comment_authorName:authorName, comment_postID:id},
+    { withCredentials: true });
   //console.log('Hi');
   //console.log(request);
   return {
@@ -105,7 +107,7 @@ export function addComments(id, newComment, authorID, authorName) {
 
 export function deleteComments(id) {
   const request = axios
-    .delete(`${ROOT_URL}/comments/${id}`)
+    .delete(`${ROOT_URL}/comments/${id}`, { withCredentials: true })
     //.then(() => callback());
 
   return {
@@ -117,7 +119,7 @@ export function deleteComments(id) {
 export function editComment(id, content) {
   const request = axios
     .put(`${ROOT_URL}/comments/${id}`,
-    {content:content})
+    { content: content },{ withCredentials: true })
   //console.log(request)
   return {
     type: EDIT_COMMENT,

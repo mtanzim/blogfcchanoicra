@@ -5,7 +5,7 @@ export const SIGNUP_USER ='SIGNUP_USER'
 export const signupUser = (values) => {
   //const { username, password, email } = values;
   //console.log(values);
-  const request = axios.post(`${ROOT_URL}/signup${API_KEY}`, values)
+  const request = axios.post(`${ROOT_URL}/signup${API_KEY}`, values, { withCredentials: true })
   return {
     type: SIGNUP_USER,
     payload: request
@@ -16,7 +16,7 @@ export const LOGOUT_USER = 'LOGOUT_USER'
 export const logoutUser = (values) => {
   //const { username, password, email } = values;
   //console.log(values);
-  const request = axios.get(`${ROOT_URL}/logout${API_KEY}`)
+  const request = axios.get(`${ROOT_URL}/logout${API_KEY}`, { withCredentials: true })
   return {
     type: LOGOUT_USER,
     payload: request
@@ -48,7 +48,7 @@ export const LOGIN_USER ='LOGIN_USER'
 export const loginUser = (values) => {
   //const { username, password, email } = values;
   //console.log(values);
-  const request = axios.post(`${ROOT_URL}/auth${API_KEY}`, values)
+  const request = axios.post(`${ROOT_URL}/auth${API_KEY}`, values, { withCredentials: true })
   return dispatch => {
     dispatch({
       type: LOGIN_USER,
