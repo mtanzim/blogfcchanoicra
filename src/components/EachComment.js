@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from "react-redux";
 import CommentEdit from './comment_edit'
 
 class EachComment extends Component {
@@ -24,10 +25,12 @@ class EachComment extends Component {
               (<p className="postContent">{this.props.comment.content}</p>) :
               (<CommentEdit commentID={this.props.comment._id} initContent={this.props.comment.content} toggleEdit={this.onEditCommentClick}/>)
             }
-            <div className='btn-group float-right'>
-              <button type="button" onClick={this.props.onDeleteClick(this.props.comment._id)} className='btn btn-danger'>Delete</button>
-              <button type="button" onClick={this.onEditCommentClick} className="btn btn-primary">Edit</button>
-            </div>
+            {this.props.auth.authenticated && this.props.comment.authorID.toString() === this.props.auth.user._id.toString() &&
+              (<div className='btn-group float-right'>
+                <button type="button" onClick={this.props.onDeleteClick(this.props.comment._id)} className='btn btn-danger'>Delete</button>
+                <button type="button" onClick={this.onEditCommentClick} className="btn btn-primary">Edit</button>
+              </div>)
+            }
           </div>
         </div>
       </div>
@@ -35,4 +38,10 @@ class EachComment extends Component {
   }
 }
 
-export default EachComment;
+function mapStateToProps(state) {
+  return {auth: state.auth};
+}
+
+export default connect(mapStateToProps, null)(EachComment);
+
+// export default EachComment;

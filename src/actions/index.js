@@ -37,8 +37,7 @@ export function createPost(values, callback) {
 
   return {
     type: CREATE_POST,
-    payload: request
-  };
+    payload: request  };
 }
 
 export function editPost(id, values) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions";
 
@@ -34,6 +34,11 @@ class PostsNew extends Component {
   }
 
   render() {
+
+    if (!this.props.auth.authenticated) {
+      return <Redirect to='/login' />;
+    }
+
     const { handleSubmit } = this.props;
 
     return (

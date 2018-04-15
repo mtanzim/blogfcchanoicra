@@ -32,9 +32,11 @@ class PostsShow extends Component {
 
     return (
       <div className='container'>
-        <div className='btn-group'>
+        <div >
           <Link className="btn btn-primary" to="/">Back To Index</Link>
-          <Link className="btn btn-success" to={{
+          {this.props.auth.authenticated && this.props.post.user.toString() === this.props.auth.user._id.toString() &&
+            (<div className='float-right btn-group'>
+            <Link className="btn btn-success" to={{
                                                   pathname:`edit/${post._id}/${post.user}`,
                                                   state:{content:post.content,
                                                           title:post.title}}}>Edit Post</Link>
@@ -43,6 +45,7 @@ class PostsShow extends Component {
             onClick={this.onDeleteClick.bind(this)}>
             Delete Post
           </button>
+          </div>)}
         </div>
         <h3 style={{marginTop:20}}>{post.title}</h3>
         <p>{post.username}</p>
@@ -53,8 +56,8 @@ class PostsShow extends Component {
   }
 }
 
-function mapStateToProps({ posts }, ownProps) {
-  return { post: posts[ownProps.match.params.id] };
+function mapStateToProps({ posts, auth }, ownProps) {
+  return { post: posts[ownProps.match.params.id], auth:auth };
 }
 
 export default connect(mapStateToProps, { fetchPost, deletePost,  fetchComments })(PostsShow);

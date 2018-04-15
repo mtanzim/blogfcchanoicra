@@ -24,11 +24,14 @@ class PostsIndex extends Component {
   render() {
     return (
        <div>
-        <div className="text-xs-right">
+        {this.props.auth.authenticated ? 
+        (<div className="text-xs-right">
           <Link className="btn btn-primary" to="/posts/new">
             New Post
           </Link>
-        </div>
+        </div>) :
+        (<p>Please <Link to='/login'>login </Link> to add posts!</p>)
+        }
         <h3 style={{'marginTop':'12px'}}>List of Articles</h3>
         <ul className="list-group">
           {this.renderPosts()}
@@ -39,7 +42,7 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { posts: state.posts, auth:state.auth };
 }
 
 export default connect(mapStateToProps, { fetchPosts })(PostsIndex);

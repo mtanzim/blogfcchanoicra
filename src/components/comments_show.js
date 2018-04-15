@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+
 import { fetchComments, deleteComments, addComments, clearComments } from "../actions";
 import EachComment from './EachComment'
 
@@ -50,19 +52,30 @@ class CommentsShow extends Component {
 
   render() {
     const { comments } = this.props;
+    // if (!this.props.auth.authenticated) {
+    //   return (
+    //     <div>
+    //       <p>Please <Link to='/login'>login </Link> to comment!</p>
+    //     </div>
+    //   )
+    // }
     return (
       <div>
         <div className="card mt-5">
           <div className="card-header">
               <h5>Comments</h5>
-              <form action='#' className='mt-4 clearfix'>
+              { this.props.auth.authenticated ? 
+              (<form action='#' className='mt-4 clearfix'>
                 <div className="form-row">
                   <div className="form-group col">
                   <textarea required onChange={this.onCommentChange} value={this.state.commentLocal} type="text" className="form-control commentText" placeholder="Post New Comment"></textarea>
                       <button type="button" onClick={this.onAddCommentClick} className="btn btn-success mt-2 ">Post</button>
                   </div>
                 </div>
-              </form>
+              </form>) :
+              
+              (<p>Please <Link to='/login'>login </Link> to comment!</p>)
+              }
             </div>
           {(comments.length > 0)  && (
             <div className='card-body'>
