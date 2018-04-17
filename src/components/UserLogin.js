@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom'
 //components
 import SignupForm from "./UserSignupReduxForm"
 import LoginForm from "./UserLoginReduxForm"
+import ErrorFooter from "./ErrorFooter";
+
 
 //actions
 import {signupUser,loginUser } from "../actions/auth"
@@ -70,22 +72,23 @@ class UserLoginBase extends React.Component {
   submitLogin = values => {
     console.log(values);
     this.props.loginUser(values)
-      .then( () => {
-        console.log(this.props.auth);
-        if (this.props.auth.authenticated) {
-          this.setState({ isRedirect: true });
-        } else {
-          alert(this.props.auth.err);
-        }
+      // .then( () => {
+      //   console.log(this.props.auth);
+      //   if (this.props.auth.authenticated) {
+      //     this.setState({ isRedirect: true });
+      //   } else {
+      //     alert(this.props.auth.err);
+      //   }
 
       
-      });
+      // });
   }
   render() {
-    if (this.state.isRedirect) {
+    if (this.props.auth.authenticated) {
       return <Redirect to='/' />;
     }
     return (
+      <div>
         <div className='container'>
           {/*this.renderClassicForm()*/}
           {NEED_MENU && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
@@ -94,9 +97,9 @@ class UserLoginBase extends React.Component {
             (<LoginForm onSubmit={this.submitLogin} />)
           }
         </div>
-      )
-  }
-
+      <ErrorFooter />
+    </div>
+  )}
 }
 
 function mapStateToProps(state) {

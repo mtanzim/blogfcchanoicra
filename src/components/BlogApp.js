@@ -6,12 +6,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 import thunk from 'redux-thunk';
 
+import {_loadAuth} from '../actions/_loadAuth'
+
 import reducers from "../reducers";
 import PostsIndex from "./posts_index";
 import PostsNew from "./posts_new";
 import PostsEdit from "./posts_edit";
 import PostsShow from "./posts_show";
 import Jumbotron from "./Jumbotron";
+
 import UserLogin from "./UserLogin"
 
 const logger = store => next => action => {
@@ -23,22 +26,26 @@ const logger = store => next => action => {
   return result
 }
 
+const persistentAuth = _loadAuth
+
 const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
+const store = createStoreWithMiddleware(reducers)
 
 class BlogApp extends Component {
   render() {
     return (
-      <Provider store={createStoreWithMiddleware(reducers)}>
+      <Provider store={store}>
         <BrowserRouter>
           <div>
             <Jumbotron />
             <Switch>
-              <Route path="/posts/new" component={PostsNew} />
+              <Route path="/posts/new" component={PostsNew}  />
               <Route path="/posts/edit/:id/:authorid" component={PostsEdit} />
-              <Route path="/posts/:id" component={PostsShow} />
+              <Route path="/posts/:id" component={PostsShow} onEnter={persistentAuth}/>
               <Route path="/login" component={UserLogin} />
-              <Route path="/" component={PostsIndex} />
+              <Route path="/" component={PostsIndex} onEnter={persistentAuth(store.dispatch)} />
             </Switch>
+            
           </div>
         </BrowserRouter>
       </Provider>

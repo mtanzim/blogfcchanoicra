@@ -1,21 +1,10 @@
 import axios from "axios";
 import { ROOT_URL, API_KEY } from "./index";
 //fake async action with timeout
-export const SIGNUP_USER ='SIGNUP_USER'
-export const signupUser = (values) => {
-  //const { username, password, email } = values;
-  //console.log(values);
-  const request = axios.post(`${ROOT_URL}/signup${API_KEY}`, values, { withCredentials: true })
-  return {
-    type: SIGNUP_USER,
-    payload: request
-  };
-}
+
 
 export const LOGOUT_USER = 'LOGOUT_USER'
 export const logoutUser = (values) => {
-  //const { username, password, email } = values;
-  //console.log(values);
   const request = axios.get(`${ROOT_URL}/logout${API_KEY}`, { withCredentials: true })
   return {
     type: LOGOUT_USER,
@@ -61,4 +50,43 @@ export const loginUser = (values) => {
       dispatch (loginFailed(err));
     })
   }
+}
+
+
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+//requires thunk
+export const signupSuccess = (res) => {
+  return {
+    type: SIGNUP_SUCCESS,
+    payload: res
+  }
+}
+
+export const SIGNUP_FAILED = 'SIGNUP_FAILED'
+//requires thunk
+export const signupFailed = (err) => {
+  return {
+    type: SIGNUP_FAILED,
+    err: err
+  }
+}
+
+export const SIGNUP_USER = 'SIGNUP_USER'
+export const signupUser = (values) => {
+  //const { username, password, email } = values;
+  //console.log(values);
+  const request = axios.post(`${ROOT_URL}/signup${API_KEY}`, values, { withCredentials: true })
+  return dispatch => {
+    dispatch({
+      type: SIGNUP_USER
+    })
+    return request
+    .then ( res => {
+      dispatch(signupSuccess(res));
+    })
+    .catch( err => {
+        dispatch(signupFailed(err));
+    })
+    payload: request
+  };
 }
