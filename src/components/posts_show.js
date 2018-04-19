@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 import { fetchPost, deletePost, fetchComments } from "../actions";
 import CommentsShow from './comments_show';
 
+import { loadAuth } from '../actions/_loadAuth'
+
 class PostsShow extends Component {
+
+
+  componentWillMount() {
+    this.props.loadAuth()
+  }
   componentDidMount() {
 
     const { id } = this.props.match.params;
@@ -60,4 +67,4 @@ function mapStateToProps({ posts, auth }, ownProps) {
   return { post: posts[ownProps.match.params.id], auth:auth };
 }
 
-export default connect(mapStateToProps, { fetchPost, deletePost,  fetchComments })(PostsShow);
+export default connect(mapStateToProps, { fetchPost, deletePost,  fetchComments, loadAuth })(PostsShow);

@@ -4,12 +4,19 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { editPost, fetchPost } from "../actions";
 
+import { loadAuth } from '../actions/_loadAuth'
+
 import "../App.css"
 
 class PostsEdit extends Component {
 
+  // componentWillMount() {
+  //   this.props.loadAuth()
+  // }
+
   componentDidMount() {
     const { id } = this.props.match.params;
+    this.props.loadAuth()
     this.props.fetchPost(id);
   }
   renderField(field) {
@@ -113,7 +120,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchPost: (id) => {
       dispatch(fetchPost(id))
-    }
+    },
+    loadAuth: () => { dispatch(loadAuth)}
   }
 }
 

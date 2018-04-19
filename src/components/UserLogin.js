@@ -72,16 +72,7 @@ class UserLoginBase extends React.Component {
   submitLogin = values => {
     console.log(values);
     this.props.loginUser(values)
-      // .then( () => {
-      //   console.log(this.props.auth);
-      //   if (this.props.auth.authenticated) {
-      //     this.setState({ isRedirect: true });
-      //   } else {
-      //     alert(this.props.auth.err);
-      //   }
 
-      
-      // });
   }
   render() {
     if (this.props.auth.authenticated) {

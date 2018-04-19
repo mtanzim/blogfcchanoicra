@@ -4,9 +4,16 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions";
 
+import { loadAuth } from '../actions/_loadAuth'
+
 import "../App.css"
 
 class PostsNew extends Component {
+
+  componentWillMount() {
+    this.props.loadAuth()
+  }
+
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -85,4 +92,4 @@ function mapStateToProps(state) {
 export default reduxForm({
   validate,
   form: "PostsNewForm"
-})(connect(mapStateToProps, { createPost })(PostsNew));
+})(connect(mapStateToProps, { createPost, loadAuth })(PostsNew));

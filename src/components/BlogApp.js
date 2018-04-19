@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 import thunk from 'redux-thunk';
 
-import {_loadAuth} from '../actions/_loadAuth'
+// import {_loadAuth} from '../actions/_loadAuth'
 
 import reducers from "../reducers";
 import PostsIndex from "./posts_index";
@@ -26,12 +26,13 @@ const logger = store => next => action => {
   return result
 }
 
-const persistentAuth = _loadAuth
+// const persistentAuth = _loadAuth
 
 const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
 const store = createStoreWithMiddleware(reducers)
 
 class BlogApp extends Component {
+  
   render() {
     return (
       <Provider store={store}>
@@ -41,9 +42,9 @@ class BlogApp extends Component {
             <Switch>
               <Route path="/posts/new" component={PostsNew}  />
               <Route path="/posts/edit/:id/:authorid" component={PostsEdit} />
-              <Route path="/posts/:id" component={PostsShow} onEnter={persistentAuth}/>
+              <Route path="/posts/:id" component={PostsShow}/>
               <Route path="/login" component={UserLogin} />
-              <Route path="/" component={PostsIndex} onEnter={persistentAuth(store.dispatch)} />
+              <Route path="/" component={PostsIndex} />
             </Switch>
             
           </div>
