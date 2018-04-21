@@ -10,7 +10,8 @@ import ErrorFooter from "./ErrorFooter";
 
 
 //actions
-import {signupUser,loginUser } from "../actions/auth"
+import {signupUser,loginUser, clearAuthErr } from "../actions/auth"
+clearAuthErr
 
 //import { loginAndGetNotes } from '../actions/auth';
 
@@ -41,12 +42,19 @@ class UserLoginBase extends React.Component {
     }
   }
 
+  componentDidMount(){
+    //clear authorization errors
+    this.props.clearAuthErr();
+  }
+
   toggleLogin = () => {
+    this.props.clearAuthErr();
     this.setState({
       isLogin: true
     });
   }
   toggleSignup = () => {
+    this.props.clearAuthErr();
     this.setState({
       isLogin: false
     });
@@ -97,6 +105,6 @@ function mapStateToProps(state) {
   return { auth: state.auth };
 }
 
-const UserLogin = connect(mapStateToProps, {signupUser,loginUser})(UserLoginBase);
+const UserLogin = connect(mapStateToProps, {signupUser,loginUser, clearAuthErr})(UserLoginBase);
 
 export default UserLogin;

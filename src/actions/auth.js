@@ -53,6 +53,15 @@ export const loginUser = (values) => {
 }
 
 
+
+export const CLEAR_AUTH_ERR = 'CLEAR_AUTH_ERR'
+export const clearAuthErr = () => {
+  return {
+    type: CLEAR_AUTH_ERR
+  }
+}
+
+
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 //requires thunk
 export const signupSuccess = (res) => {
