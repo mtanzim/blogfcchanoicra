@@ -4,15 +4,15 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions";
 
-import { loadAuth } from '../actions/_loadAuth'
+// import { loadAuth } from '../actions/_loadAuth'
 
 import "../App.css"
 
 class PostsNew extends Component {
 
-  componentWillMount() {
-    this.props.loadAuth()
-  }
+  // componentWillMount() {
+  //   this.props.loadAuth()
+  // }
 
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -42,13 +42,9 @@ class PostsNew extends Component {
 
   render() {
 
-    if (!this.props.auth.authenticated) {
-      return <Redirect to='/login' />;
-    }
-
     const { handleSubmit } = this.props;
 
-    return (
+    return (this.props.auth.authenticated&&(
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           name="title"
@@ -68,7 +64,7 @@ class PostsNew extends Component {
           <Link to="/" className="btn btn-danger">Cancel</Link>
         </div>
       </form>
-    );
+    ));
   }
 }
 
@@ -92,4 +88,4 @@ function mapStateToProps(state) {
 export default reduxForm({
   validate,
   form: "PostsNewForm"
-})(connect(mapStateToProps, { createPost, loadAuth })(PostsNew));
+})(connect(mapStateToProps, { createPost })(PostsNew));

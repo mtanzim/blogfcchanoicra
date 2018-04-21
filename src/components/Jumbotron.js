@@ -4,6 +4,9 @@ import { Link, Redirect } from "react-router-dom";
 import {logoutUser } from "../actions/auth"
 
 const Jumbotron = ({ auth, logoutUser}) => {
+  // let logoutUserHandler = ()=>{
+  //   logoutUser();
+  // }
   return (
 		<div> 
 			<div className="jumbotron">
@@ -13,7 +16,9 @@ const Jumbotron = ({ auth, logoutUser}) => {
 					):(
 						<div>
 							<h2>{auth.user.username}
-								<button onClick={logoutUser} className="ml-2 btn btn-danger">Log Out!</button>
+                <Link to="/">
+                  <button onClick={logoutUser} className="ml-2 btn btn-danger">Log Out!</button>
+                </Link>
 							</h2>
 						</div>
 					)}

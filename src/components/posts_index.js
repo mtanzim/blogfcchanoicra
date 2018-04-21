@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions";
-import { loadAuth } from '../actions/_loadAuth'
+
+
+// import { loadAuth } from '../actions/_loadAuth'
 
 
 class PostsIndex extends Component {
@@ -11,9 +13,9 @@ class PostsIndex extends Component {
     this.props.fetchPosts();
   }
 
-  componentWillMount() {
-    this.props.loadAuth()
-  }
+  // componentWillMount() {
+  //   this.props.loadAuth()
+  // }
 
   renderPosts() {
     return _.map(this.props.posts, post => {
@@ -51,4 +53,4 @@ function mapStateToProps(state) {
   return { posts: state.posts, auth:state.auth };
 }
 
-export default connect(mapStateToProps, { fetchPosts, loadAuth })(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts })(PostsIndex);

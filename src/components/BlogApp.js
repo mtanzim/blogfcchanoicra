@@ -5,8 +5,10 @@ import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 import thunk from 'redux-thunk';
+import { connect } from "react-redux";
 
 // import {_loadAuth} from '../actions/_loadAuth'
+import { loadAuth } from '../actions/_loadAuth'
 
 import reducers from "../reducers";
 import PostsIndex from "./posts_index";
@@ -32,26 +34,38 @@ const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(create
 const store = createStoreWithMiddleware(reducers)
 
 class BlogApp extends Component {
-  
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <div>
-            <Jumbotron />
-            <Switch>
-              <Route path="/posts/new" component={PostsNew}  />
-              <Route path="/posts/edit/:id/:authorid" component={PostsEdit} />
-              <Route path="/posts/:id" component={PostsShow}/>
-              <Route path="/login" component={UserLogin} />
-              <Route path="/" component={PostsIndex} />
-            </Switch>
-            
-          </div>
-        </BrowserRouter>
+        <BlogAppBase/>
       </Provider>
     );
   }
 }
+
+//do this to maintain auth state during refresh and keep authReducer synced to the server
+const BlogAppBase = connect(null, { loadAuth }) (class BlogAppBase extends Component {
+  componentWillMount() {
+    this.props.loadAuth();
+  }
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Jumbotron />
+          <Switch>
+            <Route path="/posts/new" component={PostsNew} />
+            <Route path="/posts/edit/:id/:authorid" component={PostsEdit} />
+            <Route path="/posts/:id" component={PostsShow} />
+            <Route path="/login" component={UserLogin} />
+            <Route path="/" component={PostsIndex} />
+          </Switch>
+
+        </div>
+      </BrowserRouter>
+    )
+  }
+})
+
 
 export default BlogApp;

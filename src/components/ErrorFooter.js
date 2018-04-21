@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 const ErrorFooter = (props) => {
   return (
     props.auth.err && (<div className='fixed-bottom'>
-      <div class="alert alert-danger" role="alert">
+      <div className="alert alert-danger" role="alert">
         {props.auth.err}
       </div>
     </div>)

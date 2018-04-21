@@ -4,19 +4,16 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { editPost, fetchPost } from "../actions";
 
-import { loadAuth } from '../actions/_loadAuth'
+
 
 import "../App.css"
 
 class PostsEdit extends Component {
 
-  // componentWillMount() {
-  //   this.props.loadAuth()
-  // }
+
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.loadAuth()
     this.props.fetchPost(id);
   }
   renderField(field) {
@@ -61,7 +58,7 @@ class PostsEdit extends Component {
   render() {
     const { handleSubmit } = this.props;
 
-    return (
+    return (this.props.auth.authenticated && (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           name="title"
@@ -88,7 +85,7 @@ class PostsEdit extends Component {
           <Link to="/" className="btn btn-danger">Cancel</Link>
         </div>
       </form>
-    );
+    ));
   }
 }
 
@@ -120,8 +117,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchPost: (id) => {
       dispatch(fetchPost(id))
-    },
-    loadAuth: () => { dispatch(loadAuth)}
+    }
   }
 }
 
