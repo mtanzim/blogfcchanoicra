@@ -21,14 +21,18 @@ class EachComment extends Component {
             {this.props.comment.authorName}
           </h5>
           <div className="card-body clearfix" style={{'padding':'1px'}}>
-            {!this.state.isEditingComment? 
-              (<p className="postContent">{this.props.comment.content}</p>) :
+            {!this.state.isEditingComment ? 
+              (
+                <div className= "postContent">
+                  <p>{this.props.comment.content}</p>
+                </div>
+              ) :
               (<CommentEdit commentID={this.props.comment._id} initContent={this.props.comment.content} toggleEdit={this.onEditCommentClick}/>)
             }
             {this.props.auth.authenticated && this.props.comment.authorID.toString() === this.props.auth.user._id.toString() &&
               (<div className='btn-group float-right'>
-                <button type="button" onClick={this.props.onDeleteClick(this.props.comment._id)} className='btn btn-danger'>Delete</button>
-                <button type="button" onClick={this.onEditCommentClick} className="btn btn-primary">Edit</button>
+                <button type="button" onClick={this.props.onDeleteClick(this.props.comment._id)} className='btn'>Delete</button>
+                <button type="button" onClick={this.onEditCommentClick} className="btn">Edit</button>
               </div>)
             }
           </div>

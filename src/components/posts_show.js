@@ -39,22 +39,24 @@ class PostsShow extends Component {
     return (
       <div className='container'>
         <div >
-          <Link className="btn btn-primary" to="/">Back To Index</Link>
+          <Link className="btn" to="/">Back To Index</Link>
           {this.props.auth.authenticated && this.props.post.user.toString() === this.props.auth.user._id.toString() &&
-            (<div className='float-right btn-group'>
-            <Link className="btn btn-success" to={{
+            (<div className='mt-4'>
+            <Link className="btn" to={{
                                                   pathname:`edit/${post._id}/${post.user}`,
                                                   state:{content:post.content,
                                                           title:post.title}}}>Edit Post</Link>
           <button
-            className="btn btn-danger"
+            className="btn"
             onClick={this.onDeleteClick.bind(this)}>
             Delete Post
           </button>
           </div>)}
         </div>
-        <h3 style={{marginTop:20}}>{post.title}</h3>
+        <h3 style={{ marginTop: 20 }}>{post.title}</h3>
+        <p className=''>{post.updatedAt}</p>
         <p>{post.username}</p>
+        
         <div className='postContent'>{post.content}</div>
         <CommentsShow post_id={post._id} />
       </div>

@@ -47,25 +47,9 @@ export function fetchPosts() {
   // return dispatch => dispatch({
     type: FETCH_POSTS,
     payload: request
-            // .then(res => {
-            //   dispatch(fetchPostsSuccess(res))
-            // })
-            // .catch(err => {
-            //   dispatch(fetchPostsFailed(err));
-            // })
-  // });
   }
 }
 
-
-// export function fetchPosts() {
-//   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`, { withCredentials: true });
-
-//   return {
-//     type: FETCH_POSTS,
-//     payload: request
-//   };
-// }
 
 export function createPost(values, callback) {
   // , { withCredentials: true }

@@ -96,6 +96,5 @@ export const signupUser = (values) => {
     .catch( err => {
         dispatch(signupFailed(err));
     })
-    payload: request
   };
 }

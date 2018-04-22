@@ -81,8 +81,8 @@ class PostsEdit extends Component {
           component={this.renderField}
         />*/}
         <div className='btn-group'>
-          <button type="submit" className="btn btn-primary">Post</button>
-          <Link to="/" className="btn btn-danger">Cancel</Link>
+          <button type="submit" className="btn ">Post</button>
+          <Link to="/" className="btn">Cancel</Link>
         </div>
       </form>
     ));

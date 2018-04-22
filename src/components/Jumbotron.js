@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import {logoutUser } from "../actions/auth"
+import '../style/style.css'
 
 const Jumbotron = ({ auth, logoutUser}) => {
   // let logoutUserHandler = ()=>{
@@ -12,12 +13,12 @@ const Jumbotron = ({ auth, logoutUser}) => {
 			<div className="jumbotron">
 				<Link to="/"><h1>Welcome to the Hanoi FCC Blog!</h1></Link>
 					{!auth.authenticated ? (
-						<Link to="/login" className="btn btn-success">Log in!</Link>
+						<Link to="/login" className="btn">Log in!</Link>
 					):(
 						<div>
 							<h2>{auth.user.username}
                 <Link to="/">
-                  <button onClick={logoutUser} className="ml-2 btn btn-danger">Log Out!</button>
+                  <button onClick={logoutUser} className="ml-2 btn">Log Out!</button>
                 </Link>
 							</h2>
 						</div>

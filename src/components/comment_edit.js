@@ -33,7 +33,7 @@ class CommentEdit extends Component {
                className="form-control commentText" 
                placeholder={this.props.initContent}>
          </textarea>
-         <button type="button" onClick={this.onSaveEditClick} className='btn btn-success mt-2'>Save</button>
+         <button type="button" onClick={this.onSaveEditClick} className='btn mt-2'>Save</button>
        </div>
     ) 
   }

@@ -69,12 +69,12 @@ class CommentsShow extends Component {
                 <div className="form-row">
                   <div className="form-group col">
                   <textarea required onChange={this.onCommentChange} value={this.state.commentLocal} type="text" className="form-control commentText" placeholder="Post New Comment"></textarea>
-                      <button type="button" onClick={this.onAddCommentClick} className="btn btn-success mt-2 ">Post</button>
+                      <button type="button" onClick={this.onAddCommentClick} className="btn mt-2 ">Post</button>
                   </div>
                 </div>
               </form>) :
               
-              (<p>Please <Link to='/login'>login </Link> to comment!</p>)
+              (<p>Please <Link className='btn' to='/login'>login </Link> to comment!</p>)
               }
             </div>
           {(comments.length > 0)  && (

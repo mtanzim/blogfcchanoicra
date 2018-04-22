@@ -11,7 +11,7 @@ let LoginForm = (props) => {
         {/* <Field name="username" label="Username" label="Username" component={renderAuthFormField} type="text" /> */}
         <Field name="email" label="Email" component={renderAuthFormField} type="email" />
         <Field name="password" label="Password" component={renderAuthFormField}  type="password" />
-        <button className="btn btn-success" type="submit">Log In</button>
+        <button className="btn" type="submit">Log In</button>
       </div>
     </form>
   )

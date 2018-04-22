@@ -13,7 +13,7 @@ let SignupForm = (props) => {
         <Field name="password" label="Password" component={renderAuthFormField} type="password" />
         <Field name="verPassword" label="Verify Password" component={renderAuthFormField} type="password" />
         <Field name="username" label="Username" component={renderAuthFormField} type="text" />
-        <button className="btn btn-primary" type="submit">Sign Up</button>
+        <button className="btn" type="submit">Sign Up</button>
       </div>
     </form>
   )
