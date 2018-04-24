@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPost, deletePost, fetchComments } from "../actions";
 import CommentsShow from './comments_show';
+import { convertDate } from "../actions/_convertDate"
 
 // import { loadAuth } from '../actions/_loadAuth'
 
@@ -54,7 +55,7 @@ class PostsShow extends Component {
           </div>)}
         </div>
         <h3 style={{ marginTop: 20 }}>{post.title}</h3>
-        <p className=''>{post.updatedAt}</p>
+        <p className=''>{convertDate(post.updatedAt)}</p>
         <p>{post.username}</p>
         
         <div className='postContent'>{post.content}</div>

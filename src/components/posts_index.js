@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPosts } from "../actions";
-
+import { convertDate } from "../actions/_convertDate"
 
 // import { loadAuth } from '../actions/_loadAuth'
 
@@ -17,6 +17,13 @@ class PostsIndex extends Component {
   //   this.props.loadAuth()
   // }
 
+  // convertDate(postDate) {
+  //   let msec = Date.parse(postDate)
+  //   let d = new Date(msec)
+  //   let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  //   return d.toLocaleDateString("en-US", options)
+  // }
+
   renderPosts() {
     return _.map(this.props.posts, post => {
       return (
@@ -24,7 +31,7 @@ class PostsIndex extends Component {
           <li className="list-group-item" key={post._id}>
             
             <h6>{post.title + ' - ' + post.username}</h6>
-            <sub className='float-right'>{post.updatedAt}</sub>
+            <sub className='float-right'>{convertDate(post.updatedAt)}</sub>
             
           </li>
         </Link>

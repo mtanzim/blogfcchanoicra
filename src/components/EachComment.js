@@ -47,5 +47,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(EachComment);
-
+// 
 // export default EachComment;
