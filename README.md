@@ -4,7 +4,7 @@
 Fullstack application being developed for educational purposes, using the MERN stack.
 create-react-app (CRA) boilerplate was used.
 
-This project has been converted using CRA from the following FCC Hani Front End Project:
+This project has been converted using CRA from the following FCC Hanoi Front End Project:
 
 <https://github.com/tamtm/fcchn-blog>
 
