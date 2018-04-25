@@ -73,13 +73,6 @@ class PostsEdit extends Component {
           component={this.renderField}
         />
 
-        {/*<Field
-          disabled='true'
-          label="Author"
-          name="user_id"
-          value={this.props.authorID}
-          component={this.renderField}
-        />*/}
         <div className='btn-group'>
           <button type="submit" className="btn ">Post</button>
           <Link to="/" className="btn">Cancel</Link>
@@ -106,7 +99,7 @@ function validate(values) {
 }
 
 function mapStateToProps({ posts, auth }, ownProps) {
-  return { initialValues: posts[ownProps.match.params.id], auth:auth }
+  return { initialValues: posts[ownProps.match.params.id], auth: auth }
 }
 
 

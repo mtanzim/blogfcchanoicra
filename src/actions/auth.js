@@ -33,7 +33,7 @@ export const loginSuccess = (res) => {
 }
 
 //requires thunk
-export const LOGIN_USER ='LOGIN_USER'
+export const LOGIN_USER = 'LOGIN_USER'
 export const loginUser = (values) => {
   //const { username, password, email } = values;
   //console.log(values);
@@ -43,12 +43,12 @@ export const loginUser = (values) => {
       type: LOGIN_USER,
     })
     return request
-    .then( res => {
+      .then(res => {
         dispatch(loginSuccess(res));
-    })
-    .catch (err => {
-      dispatch (loginFailed(err));
-    })
+      })
+      .catch(err => {
+        dispatch(loginFailed(err));
+      })
   }
 }
 
@@ -90,11 +90,11 @@ export const signupUser = (values) => {
       type: SIGNUP_USER
     })
     return request
-    .then ( res => {
-      dispatch(signupSuccess(res));
-    })
-    .catch( err => {
+      .then(res => {
+        dispatch(signupSuccess(res));
+      })
+      .catch(err => {
         dispatch(signupFailed(err));
-    })
+      })
   };
 }

@@ -1,28 +1,27 @@
-body, a, input, textarea {
-  font-family: 'Roboto',
-  sans-serif;
+body,
+a,
+input,
+textarea {
+  font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3, h4, h5 {
-  
-
-  font-family: 'Cormorant Garamond',
-  serif;
-
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Cormorant Garamond', serif;
 }
 
 textarea {
   resize: none;
 }
 
-
-
-
 .container .btn {
   background-color: #d32f2f;
   color: #ffffff;
   border-radius: 0px;
-  outline:none;
+  outline: none;
 }
 
 .jumbotron {
@@ -50,7 +49,6 @@ textarea {
   color: #ffffff;
 }
 
-
 .jumbotron a:link,
 .jumbotron a:hover,
 .jumbotron a:visited,
@@ -70,7 +68,6 @@ textarea {
   border-radius: 0px;
 }
 
-
 .list-group .list-group-item {
   /* background-color: #d32f2f; */
   border-bottom: 1px solid #d32f2f;
@@ -79,19 +76,21 @@ textarea {
   border-left: none;
   border-right: none;
   border-top: none;
-
 }
 
-.btn, btn:hover {
-    /* border-right: 1px solid white; */
-    margin-right: 6px;
-    border-radius: 0px;
-    border-left: none;
-    border-bottom: none;
-    border-top: none;
+.btn,
+btn:hover {
+  /* border-right: 1px solid white; */
+  margin-right: 6px;
+  border-radius: 0px;
+  border-left: none;
+  border-bottom: none;
+  border-top: none;
 }
 
-input, textarea, .card {
+input,
+textarea,
+.card {
   border-radius: 0px;
 }
 
@@ -100,15 +99,13 @@ input, textarea, .card {
 }
 
 .card-body h5 {
-  border-bottom:solid 1px #d32f2f;
+  border-bottom: solid 1px #d32f2f;
   padding-bottom: 6px;
   /* color:white; */
 }
 
-
-
-.card-header{
+.card-header {
   background-color: white;
   padding-top: 16px;
-  border-bottom:solid 1px #d32f2f;
+  border-bottom: solid 1px #d32f2f;
 }

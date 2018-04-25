@@ -1,33 +1,33 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import CommentEdit from './comment_edit'
 
 class EachComment extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={isEditingComment:false};
+    this.state = { isEditingComment: false };
   }
   onEditCommentClick = () => {
     this.setState({
-      isEditingComment:!this.state.isEditingComment
+      isEditingComment: !this.state.isEditingComment
     })
   }
 
-  render () {
-     return (
+  render() {
+    return (
       <div>
-        <div className="" style={{'margin':'1px'}}> 
+        <div className="" style={{ 'margin': '1px' }}>
           <h5 className="">
             {this.props.comment.authorName}
           </h5>
-          <div className="card-body clearfix" style={{'padding':'1px'}}>
-            {!this.state.isEditingComment ? 
+          <div className="card-body clearfix" style={{ 'padding': '1px' }}>
+            {!this.state.isEditingComment ?
               (
-                <div className= "postContent">
+                <div className="postContent">
                   <p>{this.props.comment.content}</p>
                 </div>
               ) :
-              (<CommentEdit commentID={this.props.comment._id} initContent={this.props.comment.content} toggleEdit={this.onEditCommentClick}/>)
+              (<CommentEdit commentID={this.props.comment._id} initContent={this.props.comment.content} toggleEdit={this.onEditCommentClick} />)
             }
             {this.props.auth.authenticated && this.props.comment.authorID.toString() === this.props.auth.user._id.toString() &&
               (<div className='btn-group float-right'>
@@ -38,12 +38,12 @@ class EachComment extends Component {
           </div>
         </div>
       </div>
-    ) 
+    )
   }
 }
 
 function mapStateToProps(state) {
-  return {auth: state.auth};
+  return { auth: state.auth };
 }
 
 export default connect(mapStateToProps, null)(EachComment);

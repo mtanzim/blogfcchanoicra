@@ -23,18 +23,23 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /*css for blog app*/
+
 #postContent {
-  height:200px;
+  height: 200px;
   white-space: pre-wrap;
 }
 
 .commentText {
-  height:75px;
+  height: 75px;
   white-space: pre-wrap;
 }
 

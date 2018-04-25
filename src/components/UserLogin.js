@@ -10,39 +10,22 @@ import ErrorFooter from "./ErrorFooter";
 
 
 //actions
-import {signupUser,loginUser, clearAuthErr } from "../actions/auth"
+import { signupUser, loginUser, clearAuthErr } from "../actions/auth"
 clearAuthErr
 
-//import { loginAndGetNotes } from '../actions/auth';
-
-/* const mapStateToProps = (state) => {
-  return {
-    curUser: state.authReducer
-  }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loginUser: (userInfo, isLogin) => {
-      return dispatch(loginAndGetNotes(userInfo, isLogin))
-    }
-  }
-};
- */
-
-const NEED_MENU=true;
+const NEED_MENU = true;
 
 class UserLoginBase extends React.Component {
-  
+
   constructor(props) {
-    
+
     super(props);
     this.state = {
       isLogin: true//toggles between signup and login
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     //clear authorization errors
     this.props.clearAuthErr();
   }
@@ -70,11 +53,11 @@ class UserLoginBase extends React.Component {
     this.setState({ password: '' });
   }
 
-  
+
   submitSignup = values => {
     console.log(values);
     this.props.signupUser(values)
-    
+
   }
 
   submitLogin = values => {
@@ -92,19 +75,20 @@ class UserLoginBase extends React.Component {
           {/*this.renderClassicForm()*/}
           {NEED_MENU && (<LoginMenu toggleLogin={this.toggleLogin} toggleSignup={this.toggleSignup} />)}
           {!this.state.isLogin ?
-            (<SignupForm onSubmit={this.submitSignup} />):
+            (<SignupForm onSubmit={this.submitSignup} />) :
             (<LoginForm onSubmit={this.submitLogin} />)
           }
         </div>
-      <ErrorFooter />
-    </div>
-  )}
+        <ErrorFooter />
+      </div>
+    )
+  }
 }
 
 function mapStateToProps(state) {
   return { auth: state.auth };
 }
 
-const UserLogin = connect(mapStateToProps, {signupUser,loginUser, clearAuthErr})(UserLoginBase);
+const UserLogin = connect(mapStateToProps, { signupUser, loginUser, clearAuthErr })(UserLoginBase);
 
 export default UserLogin;

@@ -20,8 +20,7 @@ let SignupForm = (props) => {
 }
 
 const validate = values => {
-  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
-  //console.log(values)
+
   const errors = {};
   if (!values.username) {
     errors.username = "Username must not be empty!";
@@ -35,7 +34,7 @@ const validate = values => {
   if (!values.verPassword) {
     errors.verPassword = "Password verification must not be empty!";
   }
-  if (values.password!==values.verPassword){
+  if (values.password !== values.verPassword) {
     errors.verPassword = "Passwords must match!";
   }
   return errors;

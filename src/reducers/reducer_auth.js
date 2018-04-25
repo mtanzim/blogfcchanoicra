@@ -1,5 +1,6 @@
 import {
-  SIGNUP_USER, LOGIN_USER, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT_USER, SIGNUP_SUCCESS, SIGNUP_FAILED, CLEAR_AUTH_ERR } from "../actions/auth";
+  SIGNUP_USER, LOGIN_USER, LOGIN_FAILED, LOGIN_SUCCESS, LOGOUT_USER, SIGNUP_SUCCESS, SIGNUP_FAILED, CLEAR_AUTH_ERR
+} from "../actions/auth";
 
 import { REFRESH_FAILED, REFRESH_SUCCESS, LOGIN_REFRESH } from "../actions/_loadAuth";
 
@@ -8,16 +9,15 @@ const defaultAuth = {
   authenticated: false,
   fetching: false,
   user: {},
-  // isLogin: true,
   err: ''
 }
 
 export default function authReducer(state = defaultAuth, action) {
   switch (action.type) {
     case CLEAR_AUTH_ERR:
-      return{
+      return {
         ...state,
-        err:''
+        err: ''
       }
     case LOGIN_REFRESH:
       return state
@@ -32,7 +32,7 @@ export default function authReducer(state = defaultAuth, action) {
     case REFRESH_FAILED:
       return {
         ...defaultAuth,
-        authenticated:false,
+        authenticated: false,
         err: action.err.response.data.message
       }
     case LOGIN_FAILED:
@@ -44,7 +44,7 @@ export default function authReducer(state = defaultAuth, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        authenticated:true,
+        authenticated: true,
         err: '',
         user: action.payload.data
       }
@@ -62,15 +62,15 @@ export default function authReducer(state = defaultAuth, action) {
       }
     case SIGNUP_SUCCESS:
       return {
-      ...state,
-      authenticated:true,
-      err: '',
-      user: action.payload.data
-    }
+        ...state,
+        authenticated: true,
+        err: '',
+        user: action.payload.data
+      }
     case SIGNUP_FAILED:
       return {
         ...defaultAuth,
-        authenticated:false,
+        authenticated: false,
         err: action.err.response.data.message
       }
     default:

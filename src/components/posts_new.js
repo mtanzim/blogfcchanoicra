@@ -4,15 +4,9 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions";
 
-// import { loadAuth } from '../actions/_loadAuth'
-
 import "../App.css"
 
 class PostsNew extends Component {
-
-  // componentWillMount() {
-  //   this.props.loadAuth()
-  // }
 
   renderField(field) {
     const { meta: { touched, error } } = field;
@@ -21,7 +15,7 @@ class PostsNew extends Component {
     return (
       <div className={className}>
         <label>{field.label}</label>
-        {field.label ==="Content"?
+        {field.label === "Content" ?
           (<textarea className="form-control" id="postContent" type="text" {...field.input} />) :
           (<input className="form-control" type="text" {...field.input} />)}
         <div className="text-help">
@@ -44,15 +38,15 @@ class PostsNew extends Component {
 
     const { handleSubmit } = this.props;
 
-    return (this.props.auth.authenticated&&(
+    return (this.props.auth.authenticated && (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           name="title"
           label="Article Title"
           component={this.renderField}
         />
-          
-        
+
+
         <Field
           label="Content"
           name="content"

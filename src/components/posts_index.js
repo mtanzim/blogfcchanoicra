@@ -13,26 +13,15 @@ class PostsIndex extends Component {
     this.props.fetchPosts();
   }
 
-  // componentWillMount() {
-  //   this.props.loadAuth()
-  // }
-
-  // convertDate(postDate) {
-  //   let msec = Date.parse(postDate)
-  //   let d = new Date(msec)
-  //   let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  //   return d.toLocaleDateString("en-US", options)
-  // }
-
   renderPosts() {
     return _.map(this.props.posts, post => {
       return (
         <Link className="eachPostBar" to={`/posts/${post._id}`}>
           <li className="list-group-item" key={post._id}>
-            
+
             <h6>{post.title + ' - ' + post.username}</h6>
             <sub className='float-right'>{convertDate(post.updatedAt)}</sub>
-            
+
           </li>
         </Link>
       );
@@ -41,16 +30,16 @@ class PostsIndex extends Component {
 
   render() {
     return (
-       <div>
-        {this.props.auth.authenticated ? 
-        (<div className="text-xs-right">
-          <Link className="btn" to="/posts/new">
-            New Post
+      <div>
+        {this.props.auth.authenticated ?
+          (<div className="text-xs-right">
+            <Link className="btn" to="/posts/new">
+              New Post
           </Link>
-        </div>) :
-        (<p>Please <Link className='btn' to='/login'>log in </Link> to add posts!</p>)
+          </div>) :
+          (<p>Please <Link className='btn' to='/login'>log in </Link> to add posts!</p>)
         }
-        <h3 style={{'marginTop':'12px'}}>List of Articles</h3>
+        <h3 style={{ 'marginTop': '12px' }}>List of Articles</h3>
         <ul className="list-group">
           {this.renderPosts()}
         </ul>
@@ -60,7 +49,7 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts, auth:state.auth };
+  return { posts: state.posts, auth: state.auth };
 }
 
 export default connect(mapStateToProps, { fetchPosts })(PostsIndex);

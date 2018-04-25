@@ -37,14 +37,14 @@ class BlogApp extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BlogAppBase/>
+        <BlogAppBase />
       </Provider>
     );
   }
 }
 
 //do this to maintain auth state during refresh and keep authReducer synced to the server
-const BlogAppBase = connect(null, { loadAuth }) (class BlogAppBase extends Component {
+const BlogAppBase = connect(null, { loadAuth })(class BlogAppBase extends Component {
   componentWillMount() {
     this.props.loadAuth();
   }

@@ -5,7 +5,7 @@ import CommentsReducer from "./reducer_comments";
 import authReducer from "./reducer_auth";
 
 const rootReducer = combineReducers({
-  auth:authReducer,
+  auth: authReducer,
   posts: PostsReducer,
   comments: CommentsReducer,
   form: formReducer
