@@ -12,14 +12,26 @@ export const DELETE_POST = "delete_post";
 
 export const FETCH_COMMENTS = "fetch_comments";
 export const ADD_COMMENTS = "ADD_COMMENTS";
+export const ADD_COMMENT_FAILED = 'ADD_COMMENT_FAILED';
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 
-export const ROOT_URL = process.env.REACT_APP_API_ADDRESS;
+
+let root_url = process.env.REACT_APP_API_ADDRESS;
+if (process.env.REACT_APP_NODE_ENV === 'production') {
+  console.log('REACT in production!')
+  root_url = '/api/';
+}
+
+export const ROOT_URL = root_url;
+
 export const API_KEY = '';
 
-console.log(process.env.REACT_APP_API_ADDRESS);
+// console.log(process.env.REACT_APP_API_ADDRESS);
+
+console.log(process.env.REACT_APP_NODE_ENV);
+console.log(ROOT_URL);
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`, { withCredentials: true });
@@ -95,15 +107,20 @@ export function clearComments() {
 
 export function addComments(id, newComment, authorID, authorName) {
   //update this to use redux-form values!!!
-  const request = axios.post(`${ROOT_URL}/comments?post_id=${id}`,
+  let request = axios.post(`${ROOT_URL}/comments?post_id=${id}`,
     { comment_content: newComment, comment_authorID: authorID, comment_authorName: authorName, comment_postID: id },
     { withCredentials: true });
-  //console.log('Hi');
-  //console.log(request);
-  return {
+
+  return (dispatch) => dispatch({
     type: ADD_COMMENTS,
     payload: request
-  };
+  })
+  .catch (err => {
+    dispatch({
+      type: ADD_COMMENT_FAILED,
+    })
+    console.log(err);
+  })
 }
 
 export function deleteComments(id) {
