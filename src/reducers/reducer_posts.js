@@ -1,12 +1,15 @@
 import _ from "lodash";
-import { FETCH_POSTS, FETCH_POST, DELETE_POST, EDIT_POST, FETCH_POST_FAILED, FETCH_POSTS_FAILED, FETCH_POSTS_SUCCESS, FETCH_POST_SUCCESS } from "../actions";
+import { CREATE_POST, FETCH_POSTS, FETCH_POST, DELETE_POST, EDIT_POST, FETCH_POST_FAILED, FETCH_POSTS_FAILED, FETCH_POSTS_SUCCESS, FETCH_POST_SUCCESS } from "../actions";
 
 export default function PostsReducer(state = {}, action) {
   switch (action.type) {
     case DELETE_POST:
       return _.omit(state, action.payload);
+    case CREATE_POST:
+      if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message };
+      return state;
     case EDIT_POST:
-      if (action.payload.data === undefined) return state;
+      if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message};
       return { ...state, [action.payload.data._id]: action.payload.data };
     case FETCH_POST:
       return { ...state, [action.payload.data._id]: action.payload.data };

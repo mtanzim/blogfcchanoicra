@@ -17,20 +17,62 @@ import PostsEdit from "./posts_edit";
 import PostsShow from "./posts_show";
 import Jumbotron from "./Jumbotron";
 
+import {clearErr, addErr} from '../actions';
+
 import UserLogin from "./UserLogin"
+import ErrorFooter from "./ErrorFooter";
+
+
+const clearErrMiddleware = store => next => action => {
+
+  let result = next(action);
+  let reducerObj = store.getState();
+  if (reducerObj.err.length>0){
+    let result = next(clearErr());
+  }
+  
+  return result;
+}
+
+const triggerErr = store => next => action => {
+
+  let result = next(action);
+  let reducerObj = store.getState();
+  let reducersKeys = Object.keys(store.getState());
+
+  reducersKeys.forEach(key => {
+    if (reducerObj[key]['err']) {
+      console.group('Error');
+      console.log("There was an error with the dispatch!");
+      console.error(reducerObj[key]['err']);
+      result = next(addErr(reducerObj[key]['err']));
+      console.groupEnd('Error');
+    }
+  });
+  return result;
+}
+
 
 const logger = store => next => action => {
-  console.group(action.type)
-  console.info('dispatching', action)
+
+
+
   let result = next(action)
-  console.log('next state', store.getState())
-  console.groupEnd(action.type)
-  return result
+
+  if (process.env.REACT_APP_NODE_ENV !== 'production') {
+    console.group(action.type)
+    console.info('dispatching', action)
+    console.log('next state', store.getState())
+    console.groupEnd(action.type);
+  }
+
+
+  return result;
 }
 
 // const persistentAuth = _loadAuth
 
-const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk, promise, logger, clearErrMiddleware, triggerErr)(createStore);
 const store = createStoreWithMiddleware(reducers)
 
 class BlogApp extends Component {
@@ -60,7 +102,7 @@ const BlogAppBase = connect(null, { loadAuth })(class BlogAppBase extends Compon
             <Route path="/login" component={UserLogin} />
             <Route path="/" component={PostsIndex} />
           </Switch>
-
+          <ErrorFooter/>
         </div>
       </BrowserRouter>
     )

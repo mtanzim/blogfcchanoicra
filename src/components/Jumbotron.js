@@ -5,9 +5,7 @@ import { logoutUser } from "../actions/auth"
 import '../style/style.css'
 
 const Jumbotron = ({ auth, logoutUser }) => {
-  // let logoutUserHandler = ()=>{
-  //   logoutUser();
-  // }
+
   return (
     <div>
       <div className="jumbotron">

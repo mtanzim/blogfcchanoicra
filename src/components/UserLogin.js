@@ -27,7 +27,7 @@ class UserLoginBase extends React.Component {
 
   componentDidMount() {
     //clear authorization errors
-    this.props.clearAuthErr();
+    // this.props.clearAuthErr();
   }
 
   toggleLogin = () => {
@@ -79,7 +79,7 @@ class UserLoginBase extends React.Component {
             (<LoginForm onSubmit={this.submitLogin} />)
           }
         </div>
-        <ErrorFooter />
+        {/* <ErrorFooter /> */}
       </div>
     )
   }

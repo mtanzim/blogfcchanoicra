@@ -72,7 +72,7 @@ class CommentsShow extends Component {
               (<p>Please <Link className='btn' to='/login'>login </Link> to comment!</p>)
             }
           </div>
-          {(comments.length > 0) && (
+          {(comments) && (
             <div className='card-body'>
               {comments.map(comment => (
                 <EachComment key={comment._id} id={comment._id} comment={comment} onDeleteClick={this.onDeleteClick} onSaveEditClick={this.onSaveEditClick} />
@@ -85,7 +85,7 @@ class CommentsShow extends Component {
 
 
 function mapStateToProps(state) {
-  return { comments: state.comments, auth: state.auth };
+  return { comments: state.comments.data, auth: state.auth };
 }
 
 export default connect(mapStateToProps, { fetchComments, deleteComments, addComments, clearComments })(CommentsShow);

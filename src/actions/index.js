@@ -17,6 +17,10 @@ export const DELETE_COMMENT = "DELETE_COMMENT";
 export const CLEAR_COMMENTS = "CLEAR_COMMENTS";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 
+export const ADD_ERR = "ADD_ERR";
+export const CLEAR_ERR = "CLEAR_ERR";
+ 
+
 
 let root_url = process.env.REACT_APP_API_ADDRESS;
 if (process.env.REACT_APP_NODE_ENV === 'production') {
@@ -32,6 +36,19 @@ export const API_KEY = '';
 
 console.log(process.env.REACT_APP_NODE_ENV);
 console.log(ROOT_URL);
+
+export function clearErr(){
+  return {
+    type: CLEAR_ERR,
+  }
+}
+
+export function addErr(err='Default err') {
+  return {
+    type: ADD_ERR,
+    payload: err
+  };
+}
 
 export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`, { withCredentials: true });
@@ -70,7 +87,7 @@ export function editPost(id, values) {
 export function fetchPost(id) {
   const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`, { withCredentials: true });
   return {
-    type: FETCH_POST,
+    type: FETCH_POST, 
     payload: request
   }
 }
@@ -111,22 +128,15 @@ export function addComments(id, newComment, authorID, authorName) {
     { comment_content: newComment, comment_authorID: authorID, comment_authorName: authorName, comment_postID: id },
     { withCredentials: true });
 
-  return (dispatch) => dispatch({
+  return {
     type: ADD_COMMENTS,
     payload: request
-  })
-  .catch (err => {
-    dispatch({
-      type: ADD_COMMENT_FAILED,
-    })
-    console.log(err);
-  })
+  }
 }
 
 export function deleteComments(id) {
   const request = axios
     .delete(`${ROOT_URL}/comments/${id}`, { withCredentials: true })
-  //.then(() => callback());
 
   return {
     type: DELETE_COMMENT,
