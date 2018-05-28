@@ -109,3 +109,22 @@ textarea,
   padding-top: 16px;
   border-bottom: solid 1px #d32f2f;
 }
+
+#postContent {
+  height: 200px;
+  white-space: pre-wrap;
+}
+
+.commentText {
+  height: 75px;
+  white-space: pre-wrap;
+}
+
+.postContent {
+  white-space: pre-wrap;
+  padding: 10px;
+}
+
+a {
+  cursor: pointer;
+}

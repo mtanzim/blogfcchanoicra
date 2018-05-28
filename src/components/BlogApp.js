@@ -22,6 +22,8 @@ import {clearErr, addErr} from '../actions';
 import UserLogin from "./UserLogin"
 import ErrorFooter from "./ErrorFooter";
 
+import '../style/style.css';
+
 
 const clearErrMiddleware = store => next => action => {
 
@@ -41,12 +43,14 @@ const triggerErr = store => next => action => {
   let reducersKeys = Object.keys(store.getState());
 
   reducersKeys.forEach(key => {
+    //remove err on
+    // console.log(key);
     if (reducerObj[key]['err']) {
-      console.group('Error');
-      console.log("There was an error with the dispatch!");
-      console.error(reducerObj[key]['err']);
+      // console.group('Error');
+      // console.log("There was an error with the dispatch!");
+      // console.error(reducerObj[key]['err']);
       result = next(addErr(reducerObj[key]['err']));
-      console.groupEnd('Error');
+      // console.groupEnd('Error');
     }
   });
   return result;
@@ -59,12 +63,12 @@ const logger = store => next => action => {
 
   let result = next(action)
 
-  if (process.env.REACT_APP_NODE_ENV !== 'production') {
-    console.group(action.type)
-    console.info('dispatching', action)
-    console.log('next state', store.getState())
-    console.groupEnd(action.type);
-  }
+  // if (process.env.REACT_APP_NODE_ENV !== 'production') {
+  //   console.group(action.type)
+  //   console.info('dispatching', action)
+  //   console.log('next state', store.getState())
+  //   console.groupEnd(action.type);
+  // }
 
 
   return result;

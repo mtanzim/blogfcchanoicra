@@ -33,13 +33,14 @@ export default function authReducer(state = defaultAuth, action) {
       return {
         ...defaultAuth,
         authenticated: false,
-        err: action.err.response.data.message
+        // don't need to trigger error to user!
+        // err: action.err.response.data.message
       }
     case LOGIN_FAILED:
       return {
         ...defaultAuth,
         authenticated: false,
-        err: action.err.response.data.message
+        err: action.err.response ? action.err.response.data.message : 'No response from server!'
       }
     case LOGIN_SUCCESS:
       return {
@@ -71,7 +72,7 @@ export default function authReducer(state = defaultAuth, action) {
       return {
         ...defaultAuth,
         authenticated: false,
-        err: action.err.response.data.message
+        err: action.err.response ? action.err.response.data.message : 'No response from server!'
       }
     default:
       return state;

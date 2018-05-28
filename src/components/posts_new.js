@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createPost } from "../actions";
 
-import "../App.css"
+// import "../App.css"
 
 class PostsNew extends Component {
 
@@ -26,9 +26,9 @@ class PostsNew extends Component {
   }
 
   onSubmit(values) {
-    console.log(this.props.auth)
+    // console.log(this.props.auth)
     let modValues = { ...values, user: this.props.auth.user._id, username: this.props.auth.user.username }
-    console.log(modValues);
+    // console.log(modValues);
     new Promise( (resolve, reject) => {
       this.props.createPost(modValues)
       .then( (res) =>{

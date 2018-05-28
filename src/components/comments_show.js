@@ -25,7 +25,7 @@ class CommentsShow extends Component {
   onAddCommentClick = () => {
     if (this.state.commentLocal) {
 
-      console.log(this.props.auth);
+      // console.log(this.props.auth);
       this.props.addComments(this.props.post_id, this.state.commentLocal, this.props.auth.user._id, this.props.auth.user.username);
       this.setState({
         commentLocal: ''
@@ -72,12 +72,12 @@ class CommentsShow extends Component {
               (<p>Please <Link className='btn' to='/login'>login </Link> to comment!</p>)
             }
           </div>
-          {(comments) && (
+          { comments ? (
             <div className='card-body'>
               {comments.map(comment => (
                 <EachComment key={comment._id} id={comment._id} comment={comment} onDeleteClick={this.onDeleteClick} onSaveEditClick={this.onSaveEditClick} />
               ))}
-            </div>)}
+            </div>) : (<p className='ml-2 mt-2'>Loading...</p>)}
         </div>
       </div>)
   }

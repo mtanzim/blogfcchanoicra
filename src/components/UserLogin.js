@@ -48,20 +48,20 @@ class UserLoginBase extends React.Component {
     this.props.loginUser({ email: this.state.username, password: this.state.password }, this.state.isLogin)
       .then(() => this.setState({ isRedirect: true }))
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
     this.setState({ password: '' });
   }
 
 
   submitSignup = values => {
-    console.log(values);
+    // console.log(values);
     this.props.signupUser(values)
 
   }
 
   submitLogin = values => {
-    console.log(values);
+    // console.log(values);
     this.props.loginUser(values)
 
   }

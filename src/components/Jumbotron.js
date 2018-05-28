@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { logoutUser } from "../actions/auth"
-import '../style/style.css'
+import { logoutUser } from "../actions/auth";
+
 
 const Jumbotron = ({ auth, logoutUser }) => {
 

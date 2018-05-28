@@ -6,7 +6,7 @@ import { editPost, fetchPost } from "../actions";
 
 
 
-import "../App.css"
+// import "../App.css"
 
 class PostsEdit extends Component {
 
@@ -46,8 +46,8 @@ class PostsEdit extends Component {
   }
 
   onSubmit(values) {
-    console.log(values._id);
-    console.log(this.props.auth);
+    // console.log(values._id);
+    // console.log(this.props.auth);
     const { id } = this.props.match.params;
     this.props.editPost(id, { title: values.title, content: values.content, user_id: this.props.auth.user._id })
       .then(() => {

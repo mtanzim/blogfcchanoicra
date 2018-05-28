@@ -24,7 +24,7 @@ export const refreshSuccess = (res) => {
 //requires thunk
 export const LOGIN_REFRESH = 'LOGIN_REFRESH'
 export const loadAuth = (dispatch) => {
-  console.log('refreshing auth')
+  // console.log('refreshing auth')
   const request = axios.get(`${ROOT_URL}/readSession${API_KEY}`, { withCredentials: true })
   return dispatch => {
     dispatch({

@@ -7,6 +7,7 @@ export default function CommentsReducer(state = {err:'', data:[]}, action) {
     
   switch (action.type) {
     case FETCH_COMMENTS:
+      if (action.payload.data === undefined) return state;
       return {...state, err:'', data:action.payload.data};
     case EDIT_COMMENT:
       if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message }; 

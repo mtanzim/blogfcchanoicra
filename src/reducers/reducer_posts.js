@@ -12,14 +12,16 @@ export default function PostsReducer(state = {}, action) {
       if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message};
       return { ...state, [action.payload.data._id]: action.payload.data };
     case FETCH_POST:
+      if (action.payload.data === undefined) return state;
       return { ...state, [action.payload.data._id]: action.payload.data };
     case FETCH_POSTS:
+      if (action.payload.data === undefined) return state;
       return _.mapKeys(action.payload.data.data, "_id");
     case FETCH_POSTS_FAILED:
-      console.log(action.err)
+      console.log(action.err);
       return state
     case FETCH_POST_FAILED:
-      console.log(action.err)
+      console.log(action.err);
       return state
     default:
       return state;
