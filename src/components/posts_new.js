@@ -29,9 +29,17 @@ class PostsNew extends Component {
     console.log(this.props.auth)
     let modValues = { ...values, user: this.props.auth.user._id, username: this.props.auth.user.username }
     console.log(modValues);
-    this.props.createPost(modValues, () => {
-      this.props.history.push("/");
-    });
+    new Promise( (resolve, reject) => {
+      this.props.createPost(modValues)
+      .then( (res) =>{
+        if (res.payload.data === undefined) {
+          reject('Create not complete!')
+        }
+        resolve('Done!');
+      })
+    })
+    .then(() => this.props.history.push("/") )
+    .catch( err => console.log(err));
   }
 
   render() {

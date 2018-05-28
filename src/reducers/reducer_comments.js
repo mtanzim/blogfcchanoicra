@@ -11,7 +11,7 @@ export default function CommentsReducer(state = {err:'', data:[]}, action) {
     case EDIT_COMMENT:
       if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message }; 
       return {
-        ...state, err: '', data: state.map( comment => {
+        ...state, err: '', data: state.data.map( comment => {
         if (comment._id === action.payload.data._id) {
           return { ...comment, content: action.payload.data.content };
         } else {

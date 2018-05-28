@@ -34,6 +34,8 @@ export const API_KEY = '';
 
 // console.log(process.env.REACT_APP_API_ADDRESS);
 
+// In the future, remove the callback structure to use async code in the components themselves (see createPost)
+
 console.log(process.env.REACT_APP_NODE_ENV);
 console.log(ROOT_URL);
 
@@ -59,11 +61,10 @@ export function fetchPosts() {
 }
 
 
-export function createPost(values, callback) {
+export function createPost(values) {
   // , { withCredentials: true }
   const request = axios
     .post(`${ROOT_URL}/posts${API_KEY}`, values, { withCredentials: true })
-    .then(() => callback());
 
   return {
     type: CREATE_POST,

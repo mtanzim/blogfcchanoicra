@@ -15,16 +15,18 @@ class PostsIndex extends Component {
 
   renderPosts() {
     return _.map(this.props.posts, post => {
-      return (
-        <Link className="eachPostBar" to={`/posts/${post._id}`}>
-          <li className="list-group-item" key={post._id}>
+      if (post) {
+        return (
+          <Link key={post._id} id={post._id} className="eachPostBar" to={`/posts/${post._id}`}>
+            <li className="list-group-item" key={post._id} id={post._id}>
 
-            <h6>{post.title + ' - ' + post.username}</h6>
-            <sub className='float-right'>{convertDate(post.updatedAt)}</sub>
+              <h6>{post.title + ' - ' + post.username}</h6>
+              <sub className='float-right'>{convertDate(post.updatedAt)}</sub>
 
-          </li>
-        </Link>
-      );
+            </li>
+          </Link>
+        );
+      }
     });
   }
 

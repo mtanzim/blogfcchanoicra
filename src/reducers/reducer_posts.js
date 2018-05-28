@@ -6,8 +6,8 @@ export default function PostsReducer(state = {}, action) {
     case DELETE_POST:
       return _.omit(state, action.payload);
     case CREATE_POST:
-      if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message };
-      return state;
+      if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message};
+      return {...state, err:''};
     case EDIT_POST:
       if (action.payload.data === undefined) return { ...state, err: action.payload.response.data.message};
       return { ...state, [action.payload.data._id]: action.payload.data };
